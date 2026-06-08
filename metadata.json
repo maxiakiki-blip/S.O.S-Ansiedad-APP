@@ -1,0 +1,6 @@
+{
+  "name": "S.O.S Ansiedad",
+  "description": "Una aplicación de rescate y prevención para la ansiedad con guías de respiración táctica, ejercicios de acupresión de 7 puntos, conexión sensorial (5-4-3-2-1), diario de emociones y sonidos relajantes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
