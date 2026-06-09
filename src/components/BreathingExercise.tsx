@@ -22,7 +22,7 @@ export default function BreathingExercise({ onBack, logActivity, onComplete }: B
 
   // Sincronizar loops de sonido terapéuticos con la fase de respiración
   useEffect(() => {
-    if (!isRunning || isMuted) {
+    if (!isRunning || isMuted || cyclesCompleted >= 4) {
       stopOscillator();
       return;
     }
@@ -80,7 +80,7 @@ export default function BreathingExercise({ onBack, logActivity, onComplete }: B
     return () => {
       stopOscillator();
     };
-  }, [phase, isMuted, isRunning]);
+  }, [phase, isMuted, isRunning, cyclesCompleted]);
 
   const stopOscillator = () => {
     if (oscRef.current) {
