@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Wind, Hand, AlertCircle, Play } from 'lucide-react';
 import BreathingExercise from './BreathingExercise';
 import GroundingExercise from './GroundingExercise';
+import ButterflyHug from './ButterflyHug';
 
 interface TabRescateProps {
   logActivity: (activity: string) => void;
@@ -22,6 +23,15 @@ export default function TabRescate({ logActivity }: TabRescateProps) {
   if (activeEmergency === 'grounding') {
     return (
       <GroundingExercise 
+        onBack={() => setActiveEmergency(null)} 
+        logActivity={logActivity} 
+        onComplete={() => setActiveEmergency('butterfly')}
+      />
+    );
+  }
+  if (activeEmergency === 'butterfly') {
+    return (
+      <ButterflyHug 
         onBack={() => setActiveEmergency(null)} 
         logActivity={logActivity} 
       />
@@ -69,6 +79,22 @@ export default function TabRescate({ logActivity }: TabRescateProps) {
             <div className="text-left">
               <h3 className="font-bold text-[#1e293b] text-sm">Conexión Sensorial</h3>
               <p className="text-xs text-gray-400 font-medium">Método 5-4-3-2-1: enraízate ahora</p>
+            </div>
+          </div>
+          <Play className="w-5 h-5 text-gray-400 fill-current" />
+        </button>
+
+        <button 
+          onClick={() => setActiveEmergency('butterfly')}
+          className="w-full bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between hover:bg-gray-50 active:bg-gray-100 transition-colors"
+        >
+          <div className="flex items-center gap-3">
+            <div className="bg-purple-50 p-2.5 rounded-xl text-[#b388c4] flex items-center justify-center w-[42px] h-[42px]">
+              <span className="text-xl leading-none">🦋</span>
+            </div>
+            <div className="text-left">
+              <h3 className="font-bold text-[#1e293b] text-sm">Abrazo de Mariposa</h3>
+              <p className="text-xs text-gray-400 font-medium">Estimulación bilateral (EMDR): disipa la alerta</p>
             </div>
           </div>
           <Play className="w-5 h-5 text-gray-400 fill-current" />

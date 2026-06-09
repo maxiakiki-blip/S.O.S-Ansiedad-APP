@@ -4,6 +4,7 @@ import { Eye, Hand, Ear, Wind, CheckCircle2, ArrowLeft, ArrowRight, ShieldCheck,
 interface GroundingExerciseProps {
   onBack: () => void;
   logActivity: (activity: string) => void;
+  onComplete?: () => void;
 }
 
 interface GroundingStep {
@@ -20,7 +21,7 @@ interface GroundingStep {
   suggestions: string[];
 }
 
-export default function GroundingExercise({ onBack, logActivity }: GroundingExerciseProps) {
+export default function GroundingExercise({ onBack, logActivity, onComplete }: GroundingExerciseProps) {
   const [currentStep, setCurrentStep] = useState(0);
   const [inputs, setInputs] = useState<string[][]>([[], [], [], [], []]);
   const [currentInputValue, setCurrentInputValue] = useState('');
@@ -150,12 +151,29 @@ export default function GroundingExercise({ onBack, logActivity }: GroundingExer
         <p className="text-gray-600 mb-8 text-sm leading-relaxed">
           ¡Felicitaciones! Has completado el protocolo completo 5-4-3-2-1. Sintonizar tus 5 sentidos calma directamente los circuitos de la amígdala cerebral trayéndote de regreso al aquí y el ahora.
         </p>
-        <button 
-          onClick={onBack}
-          className="w-full py-4 bg-[#1e293b] text-white rounded-xl font-bold hover:bg-black transition-colors shadow-md"
-        >
-          Volver a Rescate
-        </button>
+        {onComplete ? (
+          <div className="w-full space-y-3">
+            <button 
+              onClick={onComplete}
+              className="w-full py-4 bg-[#b388c4] text-white rounded-xl font-bold hover:bg-[#a174b2] transition-colors shadow-md flex justify-center items-center gap-2"
+            >
+              Progreso SOS: Abrazo Mariposa 🦋
+            </button>
+            <button 
+              onClick={onBack}
+              className="w-full py-3 bg-gray-100 hover:bg-gray-200 text-gray-500 rounded-xl font-bold transition-all text-sm"
+            >
+              Volver a Rescate
+            </button>
+          </div>
+        ) : (
+          <button 
+            onClick={onBack}
+            className="w-full py-4 bg-[#1e293b] text-white rounded-xl font-bold hover:bg-black transition-colors shadow-md"
+          >
+            Volver a Rescate
+          </button>
+        )}
       </div>
     );
   }
