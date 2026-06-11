@@ -205,33 +205,33 @@ export default function CalmingSounds({ onBack, logActivity }: CalmingSoundsProp
       }
 
       setPlaying(id);
-      logActivity('Sonidos Relajantes');
+      logActivity('Sons Relaxantes');
     } catch (e) { 
       console.warn("Audio error en sonidos calmantes", e); 
     }
   };
 
   const sounds = [
-    { id: 1, name: 'Arroyo de Agua Corriente', icon: <Droplets className="w-5 h-5" />, color: 'text-blue-400 bg-blue-50/10' },
-    { id: 2, name: 'Ruido Rosa Estabilizador', icon: <Music className="w-5 h-5" />, color: 'text-rose-400 bg-rose-50/10' },
-    { id: 3, name: 'Tono Sanador 432Hz', icon: <Sun className="w-5 h-5" />, color: 'text-amber-500 bg-amber-50/10' },
-    { id: 4, name: 'Tono Regenerador 528Hz', icon: <HeartPulse className="w-5 h-5" />, color: 'text-emerald-500 bg-emerald-50/10' },
+    { id: 1, name: 'Riacho de Água Corrente', icon: <Droplets className="w-5 h-5" />, color: 'text-blue-400 bg-blue-50/10' },
+    { id: 2, name: 'Ruído Rosa Estabilizador', icon: <Music className="w-5 h-5" />, color: 'text-rose-400 bg-rose-50/10' },
+    { id: 3, name: 'Tom de Cura 432Hz', icon: <Sun className="w-5 h-5" />, color: 'text-amber-500 bg-amber-50/10' },
+    { id: 4, name: 'Tom Regenerador 528Hz', icon: <HeartPulse className="w-5 h-5" />, color: 'text-emerald-500 bg-emerald-50/10' },
     { id: 5, name: 'Binaural Delta (3.5Hz)', icon: <Moon className="w-5 h-5" />, color: 'text-indigo-400 bg-indigo-50/10' },
   ];
 
   return (
     <div className="animate-in fade-in pb-8">
-      <HeaderBack onBack={onBack} title="Sonidos Calmantes" />
+      <HeaderBack onBack={onBack} title="Sons Calmantes" />
       
       <div className="bg-[#1e293b] text-white rounded-3xl p-5 shadow-lg mb-6 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-10 -mt-10 blur-2xl"></div>
         <div className="text-center mb-6 relative z-10">
           <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-3 relative">
              {playing && <div className="absolute inset-0 border-2 border-[#b388c4] rounded-full animate-ping opacity-30"></div>}
-             <Ear className="w-8 h-8 text-white opacity-90" />
+              <Ear className="w-8 h-8 text-white opacity-90" />
           </div>
-          <h3 className="text-lg font-bold">Frecuencias Neuro-Estabilizadoras</h3>
-          <p className="text-xs text-gray-400">Recomendamos usar audífonos para una inmersión completa</p>
+          <h3 className="text-lg font-bold">Frequências Neuro-Estabilizadoras</h3>
+          <p className="text-xs text-gray-400">Recomendamos usar fones de ouvido para uma imersão completa</p>
         </div>
 
         <div className="space-y-2.5 relative z-10">
@@ -256,9 +256,9 @@ export default function CalmingSounds({ onBack, logActivity }: CalmingSoundsProp
         <div className="flex gap-3 items-start">
           <Info className="w-5 h-5 text-[#b388c4] flex-shrink-0 mt-0.5" />
           <div>
-            <h4 className="font-bold text-[#1e293b] text-xs mb-1">Fundamentos del Neuroentrenamiento</h4>
+            <h4 className="font-bold text-[#1e293b] text-xs mb-1">Fundamentos do Neurotreinamento</h4>
             <p className="text-xs text-gray-600 leading-relaxed">
-              La estimulación auditiva continua y el desfase binaural de muy baja frecuencia (Ondas Delta) guían a la corteza cerebral a apaciguar las oscilaciones neuronales hiperactivas, dando prioridad a un estado reparador e idóneo para combatir el desasosiego físico.
+              A estimulação auditiva contínua e a diferença binaural de baixa frequência (Ondas Delta) guiam o córtex cerebral a apaziguar as oscilações neuronais hiperativas, priorizando um estado reparador e ideal para combater a ansiedade física.
             </p>
           </div>
         </div>

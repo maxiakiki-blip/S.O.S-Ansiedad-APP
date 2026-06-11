@@ -41,8 +41,8 @@ export default function TabRescate({ logActivity }: TabRescateProps) {
   return (
     <div className="flex flex-col items-center justify-center min-h-[70vh] animate-in fade-in duration-300">
       <div className="text-center mb-8">
-        <h2 className="text-2xl font-black text-[#1e293b] mb-2">¿Sientes Ansiedad Ahora?</h2>
-        <p className="text-gray-500 text-sm px-4">Pulsa el botón de emergencia para iniciar el protocolo de rescate inmediato.</p>
+        <h2 className="text-2xl font-black text-[#1e293b] mb-2">Está Sentindo Ansiedade Agora?</h2>
+        <p className="text-gray-500 text-sm px-4">Pressione o botão de emergência para iniciar o protocolo de resgate imediato.</p>
       </div>
 
       <button 
@@ -52,7 +52,7 @@ export default function TabRescate({ logActivity }: TabRescateProps) {
         <div className="absolute inset-0 rounded-full border-2 border-[#b388c4] animate-ping opacity-20"></div>
         <AlertCircle className="w-12 h-12 mb-2" />
         <span className="font-extrabold text-xl tracking-wider">S.O.S</span>
-        <span className="text-[10px] font-black tracking-widest opacity-80 mt-1">INICIAR RESCATE</span>
+        <span className="text-[10px] font-black tracking-widest opacity-80 mt-1">INICIAR RESGATE</span>
       </button>
 
       <div className="w-full space-y-3">
@@ -63,8 +63,8 @@ export default function TabRescate({ logActivity }: TabRescateProps) {
           <div className="flex items-center gap-3">
             <div className="bg-blue-50 p-2.5 rounded-xl text-blue-500"><Wind className="w-5 h-5" /></div>
             <div className="text-left">
-              <h3 className="font-bold text-[#1e293b] text-sm">Respiración Táctica</h3>
-              <p className="text-xs text-gray-400 font-medium">Caja de 4 segundos: estabiliza tu pulso</p>
+              <h3 className="font-bold text-[#1e293b] text-sm">Respiração Tática</h3>
+              <p className="text-xs text-gray-400 font-medium">Caixa de 4 segundos: estabilize seu pulso</p>
             </div>
           </div>
           <Play className="w-5 h-5 text-gray-400 fill-current" />
@@ -77,8 +77,8 @@ export default function TabRescate({ logActivity }: TabRescateProps) {
           <div className="flex items-center gap-3">
             <div className="bg-emerald-50 p-2.5 rounded-xl text-emerald-500"><Hand className="w-5 h-5" /></div>
             <div className="text-left">
-              <h3 className="font-bold text-[#1e293b] text-sm">Conexión Sensorial</h3>
-              <p className="text-xs text-gray-400 font-medium">Método 5-4-3-2-1: enraízate ahora</p>
+              <h3 className="font-bold text-[#1e293b] text-sm">Conexão Sensorial</h3>
+              <p className="text-xs text-gray-400 font-medium">Método 5-4-3-2-1: traga sua mente ao presente</p>
             </div>
           </div>
           <Play className="w-5 h-5 text-gray-400 fill-current" />
@@ -93,8 +93,8 @@ export default function TabRescate({ logActivity }: TabRescateProps) {
               <span className="text-xl leading-none">🦋</span>
             </div>
             <div className="text-left">
-              <h3 className="font-bold text-[#1e293b] text-sm">Abrazo de Mariposa</h3>
-              <p className="text-xs text-gray-400 font-medium">Estimulación bilateral (EMDR): disipa la alerta</p>
+              <h3 className="font-bold text-[#1e293b] text-sm">Abraço de Borboleta</h3>
+              <p className="text-xs text-gray-400 font-medium">Estimulação bilateral (EMDR): dissipe o alerta</p>
             </div>
           </div>
           <Play className="w-5 h-5 text-gray-400 fill-current" />

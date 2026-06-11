@@ -85,7 +85,7 @@ export default function App() {
             <HeartPulse className="w-5 h-5 text-white" />
           </div>
           <h1 className="text-lg font-bold tracking-tight text-[#1e293b]">
-            S.O.S <span className="text-[#b388c4]">Ansiedad</span>
+            S.O.S <span className="text-[#b388c4]">Ansiedade</span>
           </h1>
         </div>
       </header>
@@ -108,19 +108,19 @@ export default function App() {
         <div className="max-w-md mx-auto flex justify-around">
           <NavButton 
             icon={<AlertCircle className="w-5 h-5" />} 
-            label="Rescate" 
+            label="Resgate" 
             isActive={activeTab === 'rescate'} 
             onClick={() => setActiveTab('rescate')} 
           />
           <NavButton 
             icon={<ShieldCheck className="w-5 h-5" />} 
-            label="Prevención" 
+            label="Prevenção" 
             isActive={activeTab === 'prevencion'} 
             onClick={() => setActiveTab('prevencion')} 
           />
           <NavButton 
             icon={<TrendingUp className="w-5 h-5" />} 
-            label="Progreso" 
+            label="Progresso" 
             isActive={activeTab === 'progreso'} 
             onClick={() => setActiveTab('progreso')} 
           />

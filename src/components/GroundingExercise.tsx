@@ -30,68 +30,68 @@ export default function GroundingExercise({ onBack, logActivity, onComplete }: G
   const steps: GroundingStep[] = [
     {
       number: 5,
-      sensory: 'VISTA',
-      title: '5 Cosas que puedes VER',
-      desc: 'Observa detenidamente tu entorno. Busca 5 objetos pequeños o grandes, colores o detalles y escríbelos o piénsalos.',
-      placeholder: 'Ej: El brillo del sol, una planta, mi taza...',
+      sensory: 'VISÃO',
+      title: '5 Coisas que você pode VER',
+      desc: 'Observe atentamente seu entorno. Busque 5 objetos pequenos ou grandes, cores ou detalhes e escreva ou apenas pense neles.',
+      placeholder: 'Ex: O brilho do sol, uma planta, minha xícara...',
       icon: <Eye className="w-8 h-8" />,
       bgHex: 'bg-blue-50',
       borderHex: 'border-blue-100',
       iconBgHex: 'bg-blue-100',
       iconTextHex: 'text-blue-600',
-      suggestions: ['La textura de la pared', 'Una sombra en el suelo', 'Tus propios zapatos', 'Un bolígrafo o lápiz', 'Un libro cercano']
+      suggestions: ['A textura da parede', 'Uma sombra no chão', 'Seus próprios sapatos', 'Uma caneta ou lápis', 'Um livro por perto']
     },
     {
       number: 4,
-      sensory: 'TACTO',
-      title: '4 Cosas que puedes SENTIR',
-      desc: 'Presta atención a tu cuerpo físico. Siente texturas, presiones o temperaturas y nómbralas para anclarte al presente.',
-      placeholder: 'Ej: El roce de mi ropa, el teclado frío...',
+      sensory: 'TATO',
+      title: '4 Coisas que você pode SENTIR',
+      desc: 'Preste atenção ao seu corpo físico. Sinta texturas, pressões ou temperaturas e nomeie-as para se ancorar no presente.',
+      placeholder: 'Ex: O toque da minha roupa, o teclado frio...',
       icon: <Hand className="w-8 h-8" />,
       bgHex: 'bg-emerald-50',
       borderHex: 'border-[#B2F5EA]/40',
       iconBgHex: 'bg-emerald-100',
       iconTextHex: 'text-emerald-600',
-      suggestions: ['Tus pies tocando el suelo firme', 'El viento fresco en tus brazos', 'La suavidad del pantalón', 'El respaldo de tu silla']
+      suggestions: ['Seus pés tocando o chão firme', 'O vento fresco nos braços', 'A maciez da calça', 'O encosto da sua cadeira']
     },
     {
       number: 3,
-      sensory: 'OÍDO',
-      title: '3 Cosas que puedes ESCUCHAR',
-      desc: 'Cierra los ojos un segundo. Escucha con atención y separa el ruido ambiente en 3 sonidos individuales.',
-      placeholder: 'Ej: El cantar de un pájaro, un carro lejano...',
+      sensory: 'AUDIÇÃO',
+      title: '3 Coisas que você pode OUVIR',
+      desc: 'Feche os olhos por um segundo. Ouça com atenção e separe o barulho ambiente em 3 sons individuais.',
+      placeholder: 'Ex: O cantar de um pássaro, um carro distante...',
       icon: <Ear className="w-8 h-8" />,
       bgHex: 'bg-indigo-50',
       borderHex: 'border-indigo-100',
       iconBgHex: 'bg-indigo-100',
       iconTextHex: 'text-indigo-600',
-      suggestions: ['El zumbido del aire acondicionado', 'Los pasos lejanos de alguien', 'Tu propio latido o respiración']
+      suggestions: ['O zumbido do ar-condicionado', 'Os passos distantes de alguém', 'Sua própria batida cardíaca ou respiração']
     },
     {
       number: 2,
       sensory: 'OLFATO',
-      title: '2 Cosas que puedes OLER',
-      desc: 'Inhala profundamente por la nariz. ¿Qué notas? Intenta distinguir al menos 2 aromas u olores sutiles en el ambiente.',
-      placeholder: 'Ej: Aroma a café, olor a lluvia tierna...',
+      title: '2 Coisas que você pode CHEIRAR',
+      desc: 'Inhale profundamente pelo nariz. O que você nota? Tente distinguir pelo menos 2 aromas ou cheiros sutis no ambiente.',
+      placeholder: 'Ex: Aroma de café, cheirinho de chuva...',
       icon: <Wind className="w-8 h-8" />,
       bgHex: 'bg-amber-50',
       borderHex: 'border-amber-150',
       iconBgHex: 'bg-amber-100',
       iconTextHex: 'text-amber-600',
-      suggestions: ['El perfume de tu ropa', 'Olor a hogar o madera', 'Limpieza o aire fresco']
+      suggestions: ['O perfume da sua roupa', 'Cheirinho de casa ou madeira', 'Limpeza ou ar fresco']
     },
     {
       number: 1,
-      sensory: 'GUSTO',
-      title: '1 Cosa que puedes SABOREAR',
-      desc: 'Conéctate con tu boca. Saborea la sensación actual o toma un pequeño trago de agua fresca, prestando atención al sabor.',
-      placeholder: 'Ej: Frescura de la menta, sabor neutro...',
+      sensory: 'PALADAR',
+      title: '1 Coisa que você pode SABOREAR',
+      desc: 'Conecte-se com sua boca. Saboreie a sensação atual ou dê um pequeno gole de água fresca, prestando atenção no sabor.',
+      placeholder: 'Ex: O frescor da hortelã, sabor neutro...',
       icon: <HeartPulse className="w-8 h-8" />,
       bgHex: 'bg-rose-50',
       borderHex: 'border-rose-100',
       iconBgHex: 'bg-rose-100',
       iconTextHex: 'text-rose-600',
-      suggestions: ['La saliva fresca en tu paladar', 'Sabor residual de tu comida o café', 'Un trago lento de agua fresca']
+      suggestions: ['A saliva fresca no paladar', 'Sabor residual de comida ou café', 'Um gole lento de água fresca']
     }
   ];
 
@@ -124,7 +124,7 @@ export default function GroundingExercise({ onBack, logActivity, onComplete }: G
       setCurrentInputValue('');
     } else {
       setIsFinished(true);
-      logActivity('Conexión Sensorial 5-4-3-2-1');
+      logActivity('Conexão Sensorial 5-4-3-2-1');
     }
   };
 
@@ -134,7 +134,7 @@ export default function GroundingExercise({ onBack, logActivity, onComplete }: G
     setInputs(prev => {
       const copy = [...prev];
       if (copy[currentStep].length === 0) {
-        copy[currentStep] = Array.from({ length: currentStepData.number }, (_, i) => `Elemento #${i + 1}`);
+        copy[currentStep] = Array.from({ length: currentStepData.number }, (_, i) => `Item #${i + 1}`);
       }
       return copy;
     });
@@ -147,9 +147,9 @@ export default function GroundingExercise({ onBack, logActivity, onComplete }: G
         <div className="w-24 h-24 bg-purple-100 text-[#b388c4] rounded-full flex items-center justify-center mb-6">
           <ShieldCheck className="w-12 h-12" />
         </div>
-        <h2 className="text-2xl font-bold mb-4">Totalmente Enraizado</h2>
+        <h2 className="text-2xl font-bold mb-4">Totalmente Ancorado</h2>
         <p className="text-gray-600 mb-8 text-sm leading-relaxed">
-          ¡Felicitaciones! Has completado el protocolo completo 5-4-3-2-1. Sintonizar tus 5 sentidos calma directamente los circuitos de la amígdala cerebral trayéndote de regreso al aquí y el ahora.
+          Parabéns! Você concluiu o protocolo completo 5-4-3-2-1. Sintonizar seus 5 sentidos acalma diretamente os circuitos da amígdala cerebral, trazendo você de volta para o aqui e o agora.
         </p>
         {onComplete ? (
           <div className="w-full space-y-3">
@@ -157,13 +157,13 @@ export default function GroundingExercise({ onBack, logActivity, onComplete }: G
               onClick={onComplete}
               className="w-full py-4 bg-[#b388c4] text-white rounded-xl font-bold hover:bg-[#a174b2] transition-colors shadow-md flex justify-center items-center gap-2"
             >
-              Progreso SOS: Abrazo Mariposa 🦋
+              Progresso SOS: Abraço de Borboleta 🦋
             </button>
             <button 
               onClick={onBack}
               className="w-full py-3 bg-gray-100 hover:bg-gray-200 text-gray-500 rounded-xl font-bold transition-all text-sm"
             >
-              Volver a Rescate
+              Voltar ao Resgate
             </button>
           </div>
         ) : (
@@ -171,7 +171,7 @@ export default function GroundingExercise({ onBack, logActivity, onComplete }: G
             onClick={onBack}
             className="w-full py-4 bg-[#1e293b] text-white rounded-xl font-bold hover:bg-black transition-colors shadow-md"
           >
-            Volver a Rescate
+            Voltar ao Resgate
           </button>
         )}
       </div>
@@ -198,7 +198,7 @@ export default function GroundingExercise({ onBack, logActivity, onComplete }: G
         <div>
           {/* Progress bar */}
           <div className="flex items-center justify-between mb-6">
-            <span className="text-xs font-bold text-gray-400">PASO {currentStep + 1} DE 5</span>
+            <span className="text-xs font-bold text-gray-400">PASSO {currentStep + 1} DE 5</span>
             <div className="flex gap-1">
               {steps.map((_, i) => (
                 <div 
@@ -222,7 +222,7 @@ export default function GroundingExercise({ onBack, logActivity, onComplete }: G
             </div>
             <div>
               <span className={`text-[10px] font-black tracking-widest ${currentStepData.iconTextHex} uppercase`}>
-                Sutil Canal: {currentStepData.sensory}
+                Canal Sensorial: {currentStepData.sensory}
               </span>
               <h3 className="text-lg font-black text-[#1e293b] leading-tight">
                 {currentStepData.title}
@@ -237,7 +237,7 @@ export default function GroundingExercise({ onBack, logActivity, onComplete }: G
 
           {/* Predefined helpful suggestions */}
           <div className="mb-6">
-            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block mb-2">Sugerencias reconfortantes:</span>
+            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block mb-2">Sugestões reconfortantes:</span>
             <div className="flex flex-wrap gap-2">
               {currentStepData.suggestions.map((sug, idx) => (
                 <button
@@ -271,7 +271,7 @@ export default function GroundingExercise({ onBack, logActivity, onComplete }: G
                 onClick={() => handleAddValue(currentInputValue)}
                 className="bg-[#1e293b] hover:bg-black text-white text-xs font-bold px-4 rounded-xl shadow-sm transition-colors"
               >
-                Agregar
+                Adicionar
               </button>
             </div>
           )}
@@ -279,13 +279,13 @@ export default function GroundingExercise({ onBack, logActivity, onComplete }: G
           {/* Items registered */}
           {stepItems.length > 0 && (
             <div className="space-y-2 mb-6">
-              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">Tus descubrimientos ({stepItems.length} de {currentStepData.number}):</span>
+              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">Sua lista ({stepItems.length} de {currentStepData.number}):</span>
               <div className="grid grid-cols-1 gap-2">
                 {stepItems.map((val, idx) => (
                   <div key={idx} className="flex justify-between items-center text-xs bg-gray-50 p-3 rounded-xl border border-gray-100 animate-in slide-in-from-bottom-2 duration-200">
                     <span className="font-medium text-[#1e293b]">✔ {val}</span>
                     {/* Permitir remover solo si no Skip */}
-                    {val !== `Elemento #${idx + 1}` && (
+                    {val !== `Item #${idx + 1}` && (
                       <button 
                         onClick={() => handleRemoveValue(idx)} 
                         className="text-gray-400 hover:text-rose-500 font-bold px-1"
@@ -308,14 +308,14 @@ export default function GroundingExercise({ onBack, logActivity, onComplete }: G
               onClick={handleNextStep}
               className="w-full py-4 bg-[#b388c4] text-white rounded-xl font-bold shadow-md hover:bg-[#9d73ad] transition-all flex items-center justify-center gap-2"
             >
-              {currentStep < steps.length - 1 ? 'Siguiente Canal' : 'Completar Ejercicio'} <ArrowRight className="w-5 h-5" />
+              {currentStep < steps.length - 1 ? 'Próximo Canal' : 'Concluir Exercício'} <ArrowRight className="w-5 h-5" />
             </button>
           ) : (
             <button 
               onClick={handleSkipStep}
               className="w-full py-4 bg-gray-100 hover:bg-gray-200 text-gray-500 rounded-xl font-bold transition-all"
             >
-              Hacerlo mentalmente (Siguiente)
+              Fazer mentalmente (Próximo)
             </button>
           )}
         </div>

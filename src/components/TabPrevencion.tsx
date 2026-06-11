@@ -18,14 +18,14 @@ export default function TabPrevencion({ logActivity, logMood, currentMood }: Tab
     { id: 'muy_ansioso', emoji: '😫', label: 'Ansioso' },
     { id: 'inquieto', emoji: '😕', label: 'Inquieto' },
     { id: 'tranquilo', emoji: '🙂', label: 'Tranquilo' },
-    { id: 'genial', emoji: '😌', label: 'Genial' },
+    { id: 'genial', emoji: '😌', label: 'Ótimo' },
   ];
 
   const modules = [
-    { id: 'tapping', title: 'Acupresión (7 Puntos)', desc: 'Guía clínica de puntos anatómicos', icon: <Hand className="w-6 h-6 text-emerald-500"/>, bg: 'bg-emerald-50' },
-    { id: 'caja', title: 'Caja de Preocupaciones', desc: 'Disuelve y suelta lo que te abruma', icon: <Trash2 className="w-6 h-6 text-rose-500"/>, bg: 'bg-rose-50' },
-    { id: 'sonidos', title: 'Sonidos Calmantes', desc: 'Frecuencias solfeggio y binaurales', icon: <Music className="w-6 h-6 text-indigo-500"/>, bg: 'bg-indigo-50' },
-    { id: 'frases', title: 'Dosis de Motivación', desc: 'Cogniciones y reencuadres positivos', icon: <Sparkles className="w-6 h-6 text-amber-500"/>, bg: 'bg-amber-50' },
+    { id: 'tapping', title: 'Acupressão (7 Pontos)', desc: 'Guia clínico de pontos anatômicos', icon: <Hand className="w-6 h-6 text-emerald-500"/>, bg: 'bg-emerald-50' },
+    { id: 'caja', title: 'Caixa de Preocupações', desc: 'Dissolva e liberte o que te preocupa', icon: <Trash2 className="w-6 h-6 text-rose-500"/>, bg: 'bg-rose-50' },
+    { id: 'sonidos', title: 'Sons Relaxantes', desc: 'Frequências solfeggio e binaurais', icon: <Music className="w-6 h-6 text-indigo-500"/>, bg: 'bg-indigo-50' },
+    { id: 'frases', title: 'Dose de Motivação', desc: 'Cognições e reenquadramentos positivos', icon: <Sparkles className="w-6 h-6 text-amber-500"/>, bg: 'bg-amber-50' },
   ];
 
   if (activeModule === 'tapping') return <TappingExercise onBack={() => setActiveModule(null)} logActivity={logActivity} />;
@@ -39,7 +39,7 @@ export default function TabPrevencion({ logActivity, logMood, currentMood }: Tab
       {/* MOOD TRACKER */}
       <div className="bg-white p-5 rounded-3xl shadow-sm border border-gray-100 mb-6 text-center relative overflow-hidden">
         <div className="absolute top-0 right-0 w-24 h-24 bg-[#F5EFFF] rounded-full -mr-8 -mt-8 blur-2xl"></div>
-        <h3 className="font-bold text-[#1e293b] mb-4 relative z-10 text-sm">¿Cómo te sientes hoy?</h3>
+        <h3 className="font-bold text-[#1e293b] mb-4 relative z-10 text-sm">Como você está se sentindo hoje?</h3>
         <div className="flex justify-between gap-2 relative z-10">
           {moodOptions.map(m => (
             <button 
@@ -60,7 +60,7 @@ export default function TabPrevencion({ logActivity, logMood, currentMood }: Tab
 
       <div className="mb-4">
         <h2 className="text-xl font-black text-[#1e293b] mb-1">Hábitos Preventivos</h2>
-        <p className="text-gray-400 text-xs font-medium">La práctica diaria fortalece el sistema parasimpático para evitar picos de ansiedad.</p>
+        <p className="text-gray-400 text-xs font-medium">A prática diária fortalece o sistema parassimpático para evitar picos de ansiedade.</p>
       </div>
 
       <div className="grid grid-cols-2 gap-3.5">
@@ -85,9 +85,9 @@ export default function TabPrevencion({ logActivity, logMood, currentMood }: Tab
         <div className="flex gap-3 items-start">
           <Info className="w-5 h-5 text-[#b388c4] flex-shrink-0 mt-0.5" />
           <div>
-            <h4 className="font-bold text-[#1e293b] text-xs mb-1">Guía recomendada</h4>
+            <h4 className="font-bold text-[#1e293b] text-xs mb-1">Guia recomendado</h4>
             <p className="text-xs text-gray-600 leading-relaxed">
-              Completa al menos 2 actividades de prevención al día para mantener una mente en equilibrio y un sistema nervioso calmado.
+              Conclua pelo menos 2 atividades de prevenção por dia para manter uma mente em equilíbrio e um sistema nervoso calmo.
             </p>
           </div>
         </div>

@@ -9,16 +9,16 @@ interface MotivationalProps {
 
 export default function MotivationalQuotes({ onBack, logActivity }: MotivationalProps) {
   const quotes = [
-    "La ansiedad es como una ola fuerte de mar. Lo mejor es no luchar directo contra ella; déjate flotar hasta que la marea baje naturalmente.",
-    "No tienes la obligación de resolver tu vida entera en este mismo segundo. Céntrate exclusivamente en el próximo respiro sutil.",
-    "Esta tormenta también pasará. Las emociones son como nubes que cruzan el cielo; tú eres el cielo inmenso de fondo, inalterable.",
-    "La paz no consiste en la ausencia de tormentas a tu alrededor, sino en cultivar el silencio y la seguridad en tu interior.",
-    "Estás a salvo aquí y ahora. No dejes que las fantasías temerosas del futuro roben la calidez del momento presente."
+    "A ansiedade é como uma onda forte do mar. O melhor é não lutar diretamente contra ela; deixe-se flutuar até que a maré baixe naturalmente.",
+    "Você não tem a obrigação de resolver toda a sua vida neste exato segundo. Concentre-se exclusivamente em sua próxima respiração suave.",
+    "Esta tempestade também passará. As emoções são como nuvens que cruzam o céu; você é o céu imenso de fundo, inalterável.",
+    "A paz não consiste na ausência de tempestades ao seu redor, mas sim em cultivar o silêncio e a segurança no seu interior.",
+    "Você está seguro aqui e agora. Não deixe que as fantasias temerosas do futuro roubem o aconchego do momento presente."
   ];
   const [currentIdx, setCurrentIdx] = useState(0);
 
   useEffect(() => { 
-    logActivity('Lectura Motivacional'); 
+    logActivity('Leitura Motivacional'); 
   }, []);
 
   const nextQuote = () => {
@@ -27,7 +27,7 @@ export default function MotivationalQuotes({ onBack, logActivity }: Motivational
 
   return (
     <div className="animate-in fade-in h-[70vh] flex flex-col justify-between pb-8">
-      <HeaderBack onBack={onBack} title="Dosis de Motivación" />
+      <HeaderBack onBack={onBack} title="Dose de Motivação" />
       
       <div className="flex-1 flex items-center justify-center p-4">
         <div className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 text-center relative w-full flex flex-col justify-center min-h-[250px]">
@@ -40,7 +40,7 @@ export default function MotivationalQuotes({ onBack, logActivity }: Motivational
               onClick={nextQuote}
               className="px-5 py-2.5 bg-amber-50 text-amber-700 rounded-full text-xs font-black border border-amber-200/30 hover:bg-amber-100 transition-colors"
             >
-              Siguiente Reflexión
+              Próxima Reflexão
             </button>
           </div>
         </div>

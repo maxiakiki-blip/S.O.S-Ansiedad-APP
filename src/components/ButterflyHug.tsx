@@ -63,7 +63,7 @@ export default function ButterflyHug({ onBack, logActivity }: ButterflyHugProps)
   useEffect(() => {
     if (cyclesCompleted >= 20) {
       setIsAutoRunning(false);
-      logActivity('Abrazo Mariposa');
+      logActivity('Abraço de Borboleta');
     }
   }, [cyclesCompleted]);
 
@@ -159,12 +159,12 @@ export default function ButterflyHug({ onBack, logActivity }: ButterflyHugProps)
         <div className="w-24 h-24 bg-emerald-100 text-emerald-500 rounded-full flex items-center justify-center mb-6 shadow-sm border border-emerald-200">
           <CheckCircle2 className="w-12 h-12" />
         </div>
-        <h2 className="text-2xl font-black mb-2 text-[#1e293b]">¡Sesión Completada!</h2>
+        <h2 className="text-2xl font-black mb-2 text-[#1e293b]">Sessão Concluída!</h2>
         <p className="text-[#1e293b] font-medium text-xs bg-emerald-50 text-emerald-700 px-3 py-1.5 rounded-full inline-block mb-4 border border-emerald-200">
-          🦋 Has completado 20 ciclos de estimulación bilateral
+          🦋 Você completou 20 ciclos de estimulação bilateral
         </p>
         <p className="text-gray-500 mb-8 text-sm leading-relaxed max-w-sm">
-          Excelente. Al estimular de forma rítmica y alterna ambos lados de tu cuerpo, has ayudado a que tu cerebro disminuya la velocidad de alerta y empiece a reprocesar las sensaciones de aburrimiento y tensión física.
+          Excelente. Ao estimular de forma rítmica e alternada ambos os lados do seu corpo, você ajudou o cérebro a diminuir o estado de alerta e a reprocessar as sensações de inquietação e tensão física.
         </p>
 
         <div className="w-full space-y-3">
@@ -172,13 +172,13 @@ export default function ButterflyHug({ onBack, logActivity }: ButterflyHugProps)
             onClick={handleReset}
             className="w-full py-4 bg-white text-gray-700 border border-gray-200 rounded-xl font-bold hover:bg-gray-50 transition-colors flex items-center justify-center gap-2"
           >
-            <RotateCcw className="w-4 h-4" /> Repetir Abrazo de Mariposa
+            <RotateCcw className="w-4 h-4" /> Repetir Abraço de Borboleta
           </button>
           <button 
             onClick={onBack}
             className="w-full py-4 bg-[#1e293b] text-white rounded-xl font-bold hover:bg-black transition-colors"
           >
-            Volver a Rescate
+            Voltar ao Resgate
           </button>
         </div>
       </div>
@@ -196,8 +196,8 @@ export default function ButterflyHug({ onBack, logActivity }: ButterflyHugProps)
           <ArrowLeft className="w-5 h-5 text-gray-500" />
         </button>
         <div className="text-center">
-          <span className="font-extrabold text-xs text-gray-400 uppercase tracking-widest block">EMERGENCIA</span>
-          <span className="font-bold text-sm text-[#1e293b]">Abrazo de Mariposa (EMDR)</span>
+          <span className="font-extrabold text-xs text-gray-400 uppercase tracking-widest block">EMERGÊNCIA</span>
+          <span className="font-bold text-sm text-[#1e293b]">Abraço de Borboleta (EMDR)</span>
         </div>
         <button 
           onClick={handleToggleMute}
@@ -209,11 +209,10 @@ export default function ButterflyHug({ onBack, logActivity }: ButterflyHugProps)
 
       {/* Main interactive area */}
       <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 flex-1 flex flex-col items-center py-6 relative">
-        
         {/* Step progress tracker */}
         <div className="w-full max-w-xs mb-4 bg-gray-50 rounded-2xl p-3 border border-gray-150 flex flex-col items-center">
           <div className="flex justify-between w-full text-xs font-black text-gray-500 mb-2 select-none">
-            <span>ALETEOS COMPLETADOS</span>
+            <span>TOQUES CONCLUÍDOS</span>
             <span className="text-[#b388c4]">{cyclesCompleted} de 20</span>
           </div>
           
@@ -226,10 +225,10 @@ export default function ButterflyHug({ onBack, logActivity }: ButterflyHugProps)
           </div>
           <p className="text-[9px] text-gray-400 font-extrabold mt-1.5 uppercase tracking-wide">
             {cyclesCompleted < 5 
-              ? '✨ Fase inicial: enraizando la atención' 
+              ? '✨ Fase inicial: ancorando a atenção' 
               : cyclesCompleted < 12 
-                ? '🧠 Estimulación bilateral: conectando hemisferios' 
-                : '🍃 Alivio profundo: regulando tus latidos'}
+                ? '🧠 Estimulação bilateral: conectando hemisférios' 
+                : '🍃 Alívio profundo: regulando seus batimentos'}
           </p>
         </div>
 
@@ -239,14 +238,14 @@ export default function ButterflyHug({ onBack, logActivity }: ButterflyHugProps)
             onClick={() => setShowInfo(!showInfo)}
             className="flex items-center gap-1 text-[11px] font-black tracking-wide text-[#b388c4] bg-[#F5EFFF] px-2.5 py-1 rounded-full border border-[#b388c4]/15 hover:bg-[#ebdcf5] transition-colors"
           >
-            <HelpCircle className="w-3.5 h-3.5" /> {showInfo ? 'Ocultar Guía' : '¿Qué es esto?'}
+            <HelpCircle className="w-3.5 h-3.5" /> {showInfo ? 'Ocultar Guia' : 'O que é isso?'}
           </button>
         </div>
 
         {showInfo && (
           <div className="w-full max-w-xs bg-[#F5EFFF] p-4 rounded-2xl border border-[#b388c4]/20 text-xs text-gray-600 leading-relaxed mb-4 animate-in slide-in-from-top-3 duration-300">
-            <p className="font-bold text-[#1e293b] mb-1">Estimulación Bilateral (EMDR)</p>
-            Esta técnica ayuda al cerebro a procesar la sobrecarga emocional. El sonido paneado y el golpeteo rítmico alternan la estimulación entre ambos hemisferios cerebrales, relajando activamente el sistema nervioso simpático.
+            <p className="font-bold text-[#1e293b] mb-1">Estimulação Bilateral (EMDR)</p>
+            Esta técnica ajuda o cérebro a processar a sobrevida ou sobrecarga emocional. O som direcionado e os toques rítmicos alternam a estimulação entre ambos os hemisférios cerebrais, relaxando o sistema nervoso simpático.
           </div>
         )}
 
@@ -354,14 +353,14 @@ export default function ButterflyHug({ onBack, logActivity }: ButterflyHugProps)
         {/* Action guidelines labels */}
         <div className="text-center max-w-xs h-16 flex flex-col justify-center select-none mb-3">
           <h4 className="text-lg font-black tracking-wider text-[#1e293b] flex items-center justify-center gap-1.5 leading-none">
-            {currentSide === 'left' && <span className="text-blue-500">◀ TOQUE IZQUIERDO</span>}
-            {currentSide === 'right' && <span className="text-emerald-500">TOQUE DERECHO ▶</span>}
-            {currentSide === 'none' && <span className="text-gray-400">INICIA EL RITMO</span>}
+            {currentSide === 'left' && <span className="text-blue-500">◀ TOQUE ESQUERDO</span>}
+            {currentSide === 'right' && <span className="text-emerald-500">TOQUE DIREITO ▶</span>}
+            {currentSide === 'none' && <span className="text-gray-400">INICIE O RITMO</span>}
           </h4>
           <p className="text-xs text-gray-400 font-bold px-4 mt-1">
             {mode === 'manual' 
-              ? 'Toca los círculos de colores de forma alterna en el gráfico' 
-              : 'Sigue el balanceo rítmico automático de izquierda a derecha'}
+              ? 'Toque nos círculos coloridos de forma alternada no gráfico' 
+              : 'Acompanhe o balanço rítmico automático de um lado para o outro'}
           </p>
         </div>
 
@@ -375,7 +374,7 @@ export default function ButterflyHug({ onBack, logActivity }: ButterflyHugProps)
                 : 'text-gray-500 hover:text-gray-700'
             }`}
           >
-            Modo Manual (Táctil)
+            Modo Manual (Toque)
           </button>
           <button 
             onClick={() => { setMode('auto'); toggleAutoPlay(); }}
@@ -396,13 +395,13 @@ export default function ButterflyHug({ onBack, logActivity }: ButterflyHugProps)
               onClick={() => handleTap('left')}
               className="py-3 bg-blue-50 text-blue-800 border border-blue-200 rounded-xl font-bold hover:bg-blue-100/50 transition-colors text-xs flex justify-center items-center gap-1.5 shadow-xs"
             >
-              <Heart className="w-3.5 h-3.5 fill-current" /> Mano Izq
+              <Heart className="w-3.5 h-3.5 fill-current" /> Mão Esq
             </button>
             <button 
               onClick={() => handleTap('right')}
               className="py-3 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-xl font-bold hover:bg-emerald-100/50 transition-colors text-xs flex justify-center items-center gap-1.5 shadow-xs"
             >
-              Mano Der <Heart className="w-3.5 h-3.5 fill-current" />
+              Mão Dir <Heart className="w-3.5 h-3.5 fill-current" />
             </button>
           </div>
         ) : (
@@ -413,17 +412,17 @@ export default function ButterflyHug({ onBack, logActivity }: ButterflyHugProps)
               className={`w-full py-3.5 rounded-xl text-xs font-bold shadow-sm transition-colors flex justify-center items-center gap-2 mb-3
                 ${isAutoRunning ? 'bg-amber-100 text-amber-800 border border-amber-200' : 'bg-emerald-500 text-white hover:bg-emerald-600'}`}
             >
-              {isAutoRunning ? '⏸ Pausar Metrónomo' : '▶ Activar Metrónomo'}
+              {isAutoRunning ? '⏸ Pausar Metrônomo' : '▶ Ativar Metrônomo'}
             </button>
 
             {/* Control sutil de velocidad para la estimulación EMDR */}
             <div className="w-full bg-gray-50 p-2.5 rounded-xl border border-gray-150 flex items-center justify-between">
-              <span className="text-[10px] text-gray-500 font-extrabold uppercase tracking-wide">Frecuencia / Ritmo:</span>
+              <span className="text-[10px] text-gray-500 font-extrabold uppercase tracking-wide">Frequência / Ritmo:</span>
               <div className="flex gap-1.5">
                 {[
-                  { label: 'Sosegado', ms: 1400 },
+                  { label: 'Suave', ms: 1400 },
                   { label: 'Normal', ms: 1200 },
-                  { label: 'Intermedio', ms: 900 }
+                  { label: 'Rápido', ms: 900 }
                 ].map(speed => (
                   <button
                     key={speed.ms}

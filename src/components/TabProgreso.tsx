@@ -25,7 +25,7 @@ export default function TabProgreso({ logs, moods }: TabProgresoProps) {
     'muy_ansioso': 'Ansioso(a)',
     'inquieto': 'Inquieto(a)',
     'tranquilo': 'Tranquilo(a)',
-    'genial': 'Excelente / Genial'
+    'genial': 'Excelente / Ótimo'
   };
 
   // Cálculos para Vista Mensual
@@ -34,7 +34,6 @@ export default function TabProgreso({ logs, moods }: TabProgresoProps) {
   
   const monthDays = Array.from({ length: daysInMonth }, (_, i) => {
     const d = new Date(today.getFullYear(), today.getMonth(), i + 1);
-    // Para evitar desfases de huso horario local al convertir a string
     const offset = d.getTimezoneOffset();
     const localDb = new Date(d.getTime() - (offset * 60 * 1000));
     const dateString = localDb.toISOString().split('T')[0];
@@ -56,29 +55,29 @@ export default function TabProgreso({ logs, moods }: TabProgresoProps) {
     const dateString = localDb.toISOString().split('T')[0];
     return { 
       dayNumber: d.getDate(), 
-      dayName: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'][d.getDay()],
+      dayName: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'][d.getDay()],
       dateString, 
       isToday: dateString === todayStr 
     };
   });
   
   const logKeys = Object.keys(logs);
-  let statusText = "Primeros pasos de cuidado";
+  let statusText = "Primeiros passos do cuidado";
   let statusColor = "text-amber-500 bg-amber-50 border-amber-100";
   if (logKeys.length > 3) { 
-    statusText = "Construyendo Resiliencia"; 
+    statusText = "Construindo Resiliência"; 
     statusColor = "text-emerald-600 bg-emerald-50 border-emerald-100"; 
   }
   if (logKeys.length > 10) { 
-    statusText = "Soberanía y Mente Interna"; 
+    statusText = "Soberania e Mente Interna"; 
     statusColor = "text-blue-600 bg-blue-50 border-blue-100"; 
   }
 
   return (
     <div className="animate-in fade-in duration-300">
       <div className="mb-4">
-        <h2 className="text-xl font-black text-[#1e293b] mb-1">Tu Evolución</h2>
-        <p className="text-gray-400 text-xs font-medium">Monitorea tu consistencia diaria y tu bienestar emocional.</p>
+        <h2 className="text-xl font-black text-[#1e293b] mb-1">Sua Evolução</h2>
+        <p className="text-gray-400 text-xs font-medium">Monitore sua consistência diária e seu bem-estar emocional.</p>
       </div>
 
       {/* Selector de Vistas */}
@@ -91,7 +90,7 @@ export default function TabProgreso({ logs, moods }: TabProgresoProps) {
               : 'text-gray-500 hover:text-gray-700'
           }`}
         >
-          Diario
+          Diário
         </button>
         <button 
           onClick={() => setView('weekly')} 
@@ -111,7 +110,7 @@ export default function TabProgreso({ logs, moods }: TabProgresoProps) {
               : 'text-gray-500 hover:text-gray-700'
           }`}
         >
-          Mensual
+          Mensal
         </button>
       </div>
 
@@ -120,19 +119,19 @@ export default function TabProgreso({ logs, moods }: TabProgresoProps) {
         <div className="space-y-4 animate-in slide-in-from-right-4 duration-300">
           <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8 text-center relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-1.5 bg-[#b388c4]"></div>
-            <h3 className="text-gray-400 font-bold mb-3 uppercase tracking-wider text-[10px]">Tu estado de ánimo hoy</h3>
+            <h3 className="text-gray-400 font-bold mb-3 uppercase tracking-wider text-[10px]">Como você se sente hoje</h3>
             <div className="text-6xl mb-4 filter drop-shadow-sm select-none">{todayMood ? moodEmojis[todayMood] : '😶'}</div>
             <p className="font-black text-lg text-[#1e293b]">
-              {todayMood ? `Te sientes ${moodLabels[todayMood]}` : 'Sin registro de humor'}
+              {todayMood ? `Você está se sentindo ${moodLabels[todayMood]}` : 'Sem registro de humor'}
             </p>
-            <p className="text-xs text-gray-400 mt-1">Regístralo pulsando un emoji en la pestaña Prevención</p>
+            <p className="text-xs text-gray-400 mt-1">Registre tocando em um emoji na aba Prevenção</p>
           </div>
 
           <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-5">
-            <h3 className="font-bold text-sm text-[#1e293b] mb-3">Actividades de rescate/prevención completadas</h3>
+            <h3 className="font-bold text-sm text-[#1e293b] mb-3">Atividades completadas (Resgate ou Prevenção)</h3>
             {todayActivities.length === 0 ? (
               <p className="text-xs text-gray-400 italic text-center py-8 border border-dashed border-gray-200 rounded-2xl bg-gray-50/50">
-                Aún no has completado costumbres ni actividades de rescate hoy. Puedes empezar en Rescate o Prevención.
+                Você ainda não registrou atividades hoje. Comece nas abas Resgate ou Prevenção.
               </p>
             ) : (
               <ul className="space-y-2.5">
@@ -155,7 +154,7 @@ export default function TabProgreso({ logs, moods }: TabProgresoProps) {
              <div className="flex justify-between items-center mb-5">
                <h3 className="font-bold text-[#1e293b] text-sm">Esta Semana</h3>
                <span className="text-[10px] text-[#b388c4] font-black bg-[#F5EFFF] px-2.5 py-1 rounded-lg border border-[#b388c4]/25 select-none animate-in fade-in">
-                 {weekDays[0].dayNumber} - {weekDays[6].dayNumber} {today.toLocaleString('es', { month: 'short' })}
+                 {weekDays[0].dayNumber} - {weekDays[6].dayNumber} {today.toLocaleString('pt-BR', { month: 'short' })}
                </span>
              </div>
              
@@ -194,14 +193,14 @@ export default function TabProgreso({ logs, moods }: TabProgresoProps) {
 
           {/* Estado General */}
           <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-5">
-            <h3 className="text-[10px] font-black text-gray-400 mb-3 uppercase tracking-wider">Tu Diagnóstico General</h3>
+            <h3 className="text-[10px] font-black text-gray-400 mb-3 uppercase tracking-wider">Seu Diagnóstico Geral</h3>
             <div className={`flex items-center gap-4 p-4 rounded-2xl border ${statusColor}`}>
               <div className="p-2 bg-white rounded-full shadow-sm">
                 <TrendingUp className="w-6 h-6" />
               </div>
               <div>
                 <p className="font-extrabold text-sm">{statusText}</p>
-                <p className="text-xs opacity-90">{logKeys.length} días activos registrados en la app</p>
+                <p className="text-xs opacity-90">{logKeys.length} dias ativos registrados no app</p>
               </div>
             </div>
           </div>
@@ -212,12 +211,12 @@ export default function TabProgreso({ logs, moods }: TabProgresoProps) {
       {view === 'monthly' && (
         <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-5 animate-in slide-in-from-right-4 duration-300">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="font-bold text-sm capitalize text-[#1e293b]">{today.toLocaleString('es', { month: 'long', year: 'numeric' })}</h3>
+            <h3 className="font-bold text-sm capitalize text-[#1e293b]">{today.toLocaleString('pt-BR', { month: 'long', year: 'numeric' })}</h3>
             <Calendar className="w-4 h-4 text-gray-400" />
           </div>
           
           <div className="grid grid-cols-7 gap-1 text-center text-[10px] mb-2 text-gray-400 font-bold uppercase">
-            <div>Dom</div><div>Lun</div><div>Mar</div><div>Mié</div><div>Jue</div><div>Vie</div><div>Sáb</div>
+            <div>Dom</div><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div>
           </div>
           
           <div className="grid grid-cols-7 gap-1.5 text-center text-xs">
@@ -238,7 +237,7 @@ export default function TabProgreso({ logs, moods }: TabProgresoProps) {
                     <span className="text-[11px] leading-none mt-0.5">{day.dayNumber}</span>
                   </div>
                   
-                  {/* Emoji de estado de ánimo superpuesto (pequeño arriba a la derecha) */}
+                  {/* Emoji de estado de ánimo superpuesto */}
                   {dayMood && (
                     <div className="absolute -top-1.5 -right-1 text-[11px] bg-white rounded-full shadow-xs leading-none border border-gray-100 p-[1.5px] z-10 filter drop-shadow-sm select-none">
                       {moodEmojis[dayMood]}

@@ -143,7 +143,7 @@ export default function BreathingExercise({ onBack, logActivity, onComplete }: B
   // Registrar actividad una vez alcanzados los ciclos mínimos
   useEffect(() => {
     if (cyclesCompleted >= 4) {
-      logActivity('Respiración Táctica');
+      logActivity('Respiração Tática');
     }
   }, [cyclesCompleted]);
 
@@ -151,8 +151,8 @@ export default function BreathingExercise({ onBack, logActivity, onComplete }: B
     switch (phase) {
       case 'inhale':
         return {
-          title: 'INHALAR',
-          subtitle: 'Inhala aire de forma suave y continua',
+          title: 'INSPIRAR',
+          subtitle: 'Inspire o ar de forma suave e contínua',
           color: 'bg-blue-400 text-blue-950',
           borderColor: 'border-blue-200',
           bubbleScale: 'scale-150',
@@ -161,8 +161,8 @@ export default function BreathingExercise({ onBack, logActivity, onComplete }: B
         };
       case 'hold_full':
         return {
-          title: 'SOSTENER',
-          subtitle: 'Mantén el aire con tus pulmones llenos',
+          title: 'SEGURAR',
+          subtitle: 'Segure o ar com os pulmões cheios',
           color: 'bg-emerald-400 text-emerald-950',
           borderColor: 'border-emerald-200',
           bubbleScale: 'scale-120 border-[6px]',
@@ -171,8 +171,8 @@ export default function BreathingExercise({ onBack, logActivity, onComplete }: B
         };
       case 'exhale':
         return {
-          title: 'EXHALAR',
-          subtitle: 'Suelta el aire lentamente por la boca',
+          title: 'EXPIRAR',
+          subtitle: 'Solte o ar lentamente pela boca',
           color: 'bg-[#b388c4] text-white',
           borderColor: 'border-[#EAE0F1]',
           bubbleScale: 'scale-95',
@@ -181,8 +181,8 @@ export default function BreathingExercise({ onBack, logActivity, onComplete }: B
         };
       case 'hold_empty':
         return {
-          title: 'RETENER',
-          subtitle: 'Quédate sin aire en vacío absoluto',
+          title: 'RETER',
+          subtitle: 'Fique sem ar em vazio absoluto',
           color: 'bg-amber-400 text-amber-950',
           borderColor: 'border-amber-200',
           bubbleScale: 'scale-70 border-[3px]',
@@ -215,12 +215,12 @@ export default function BreathingExercise({ onBack, logActivity, onComplete }: B
         <div className="w-24 h-24 bg-emerald-100 text-emerald-500 rounded-full flex items-center justify-center mb-6 shadow-sm border border-emerald-200">
           <CheckCircle2 className="w-12 h-12" />
         </div>
-        <h2 className="text-2xl font-black mb-2 text-[#1e293b]">¡Sesión Completada!</h2>
+        <h2 className="text-2xl font-black mb-2 text-[#1e293b]">Sessão Concluída!</h2>
         <p className="text-[#1e293b] font-medium text-xs bg-emerald-50 text-emerald-700 px-3 py-1.5 rounded-full inline-block mb-4 border border-emerald-200">
-          🎯 Completaste {cyclesCompleted} ciclos perfectos
+          🎯 Você completou {cyclesCompleted} ciclos perfeitos
         </p>
         <p className="text-gray-500 mb-8 text-sm leading-relaxed max-w-sm">
-          Has entrenado tu mente y regulado tu pulso de forma maravillosa. El estado de agitación ha decrecido notablemente. ¿Qué deseas hacer ahora?
+          Você treinou sua mente e regulou seu pulso de forma maravilhosa. O estado de agitação diminuiu visivelmente. O que deseja fazer agora?
         </p>
 
         <div className="w-full space-y-3">
@@ -228,19 +228,19 @@ export default function BreathingExercise({ onBack, logActivity, onComplete }: B
             onClick={onComplete}
             className="w-full py-4 bg-[#b388c4] text-white rounded-xl font-bold shadow-md hover:bg-[#9d73ad] transition-all flex items-center justify-center gap-2"
           >
-            Siguiente: Conexión Sensorial (5-4-3-2-1) <ChevronRight className="w-5 h-5" />
+            Próximo: Conexão Sensorial (5-4-3-2-1) <ChevronRight className="w-5 h-5" />
           </button>
           <button 
             onClick={handleReset}
             className="w-full py-4 bg-white text-gray-700 border border-gray-200 rounded-xl font-bold hover:bg-gray-50 transition-colors flex items-center justify-center gap-2"
           >
-            <RotateCcw className="w-4 h-4" /> Repetir Respiración
+            <RotateCcw className="w-4 h-4" /> Repetir Respiração
           </button>
           <button 
             onClick={onBack}
             className="w-full py-4 bg-[#1e293b] text-white rounded-xl font-bold hover:bg-black transition-colors"
           >
-            Salir al Panel Principal
+            Sair para o Painel Principal
           </button>
         </div>
       </div>
@@ -258,8 +258,8 @@ export default function BreathingExercise({ onBack, logActivity, onComplete }: B
           <ArrowLeft className="w-5 h-5 text-gray-500" />
         </button>
         <div className="text-center">
-          <span className="font-extrabold text-xs text-gray-400 uppercase tracking-widest block">EMERGENCIA</span>
-          <span className="font-bold text-sm text-[#1e293b]">Respiración Táctica</span>
+          <span className="font-extrabold text-xs text-gray-400 uppercase tracking-widest block">EMERGÊNCIA</span>
+          <span className="font-bold text-sm text-[#1e293b]">Respiração Tática</span>
         </div>
         <button 
           onClick={handleToggleMute}
@@ -275,7 +275,7 @@ export default function BreathingExercise({ onBack, logActivity, onComplete }: B
         {/* Cycle Progress Tracker Metaphor (Muestra cuántos ciclos va repitiendo) */}
         <div className="w-full max-w-xs mb-6 bg-gray-50 rounded-2xl p-4 border border-gray-150 flex flex-col items-center">
           <div className="flex justify-between w-full text-xs font-black text-gray-500 mb-2 select-none">
-            <span>CICLOS COMPLETADOS</span>
+            <span>CICLOS CONCLUÍDOS</span>
             <span className="text-[#b388c4]">{cyclesCompleted} de 4</span>
           </div>
           
@@ -301,8 +301,8 @@ export default function BreathingExercise({ onBack, logActivity, onComplete }: B
           
           <p className="text-[10px] text-gray-400 font-extrabold mt-2 uppercase tracking-wide">
             {cyclesCompleted === 0 
-              ? '✨ Ciclo Inicial: Estabilizando cuerpo' 
-              : `🧘 Ciclo ${cyclesCompleted + 1} de 4 en curso`}
+              ? '✨ Ciclo Inicial: Estabilizando corpo' 
+              : `🧘 Ciclo ${cyclesCompleted + 1} de 4 em andamento`}
           </p>
         </div>
 
@@ -360,10 +360,10 @@ export default function BreathingExercise({ onBack, logActivity, onComplete }: B
         {/* Action Guideline Labels */}
         <div className="text-center max-w-xs h-16 flex flex-col justify-center select-none">
           <h4 className="text-xl font-black tracking-widest text-[#1e293b] mb-1 animate-pulse">
-            {phase === 'inhale' && 'INHALAR'}
-            {phase === 'hold_full' && 'SOSTENER'}
-            {phase === 'exhale' && 'EXHALAR'}
-            {phase === 'hold_empty' && 'RETENER'}
+            {phase === 'inhale' && 'INSPIRAR'}
+            {phase === 'hold_full' && 'SEGURAR'}
+            {phase === 'exhale' && 'EXPIRAR'}
+            {phase === 'hold_empty' && 'RETER'}
           </h4>
           <p className="text-xs text-gray-500 font-bold px-4">{currentData.subtitle}</p>
         </div>
@@ -371,10 +371,10 @@ export default function BreathingExercise({ onBack, logActivity, onComplete }: B
         {/* Tiny step-by-step tutorial timeline with four explicit steps requested */}
         <div className="w-full max-w-xs mt-6 flex justify-between gap-1.5">
           {[
-            { label: 'Inhalar', target: 'inhale' },
-            { label: 'Sostener', target: 'hold_full' },
-            { label: 'Exhalar', target: 'exhale' },
-            { label: 'Retener', target: 'hold_empty' }
+            { label: 'Inspirar', target: 'inhale' },
+            { label: 'Segurar', target: 'hold_full' },
+            { label: 'Expirar', target: 'exhale' },
+            { label: 'Reter', target: 'hold_empty' }
           ].map((step, idx) => {
             const isCurrent = phase === step.target;
             const progressBg = 
@@ -407,7 +407,7 @@ export default function BreathingExercise({ onBack, logActivity, onComplete }: B
           onClick={handlePausePlay}
           className="mt-6 text-xs font-bold text-gray-400 hover:text-gray-600 transition-colors"
         >
-          {isRunning ? '⏸ Toca el círculo para pausar' : '▶ Toca el círculo para continuar'}
+          {isRunning ? '⏸ Toque no círculo para pausar' : '▶ Toque no círculo para continuar'}
         </button>
 
       </div>

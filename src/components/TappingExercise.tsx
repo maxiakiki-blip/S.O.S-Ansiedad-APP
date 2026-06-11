@@ -32,72 +32,72 @@ export default function TappingExercise({ onBack, logActivity }: TappingProps) {
   // Datos clínicos de los 7 puntos acupresión
   const points: PointData[] = [
     { 
-      id: 1, name: 'Entre las cejas (Yintang)', pos: 'Rostro', 
-      locationText: 'Justo en el centro del entrecejo, entre el inicio de ambas cejas.',
+      id: 1, name: 'Entre as sobrancelhas (Yintang)', pos: 'Rostro', 
+      locationText: 'Bem no centro entre as sobrancelhas, no ponto inicial de ambas.',
       techniques: [
-        { id: 'static', name: 'Presión Estática', icon: <HandIcon className="w-3.5 h-3.5"/>, desc: 'Aplica la yema del dedo índice o medio con presión media sosteniendo sin mover.' },
-        { id: 'circular', name: 'Masaje Circular', icon: <RefreshCcw className="w-3.5 h-3.5"/>, desc: 'Realiza círculos lentos y continuos manteniendo el dedo en contacto.' }
+        { id: 'static', name: 'Pressão Estática', icon: <HandIcon className="w-3.5 h-3.5"/>, desc: 'Aplique a ponta do dedo indicador ou médio com pressão moderada, mantendo sem mover.' },
+        { id: 'circular', name: 'Massagem Circular', icon: <RefreshCcw className="w-3.5 h-3.5"/>, desc: 'Faça círculos lentos e contínuos mantendo o dedo em contato.' }
       ],
-      tips: 'Excelente para aliviar el torrente de pensamientos rápidos y la agitación mental.',
+      tips: 'Excelente para aliviar o fluxo de pensamentos rápidos e a agitação mental.',
       duration: 30,
     },
     { 
-      id: 2, name: 'Debajo de la nariz (Renzhong)', pos: 'Rostro', 
-      locationText: 'En el centro del surco nasolabial, un tercio debajo de la base nasal.',
+      id: 2, name: 'Debaixo do nariz (Renzhong)', pos: 'Rostro', 
+      locationText: 'No centro do sulco nasolabial, um terço abaixo da base nasal.',
       techniques: [
-        { id: 'static', name: 'Presión Directa', icon: <HandIcon className="w-3.5 h-3.5"/>, desc: 'Ejerce una presión constante y moderada apuntando levemente hacia el paladar.' },
-        { id: 'circular', name: 'Micro círculos', icon: <RefreshCcw className="w-3.5 h-3.5"/>, desc: 'Mueve milimétricamente el tejido celular subcutáneo de forma circular.' }
+        { id: 'static', name: 'Pressão Direta', icon: <HandIcon className="w-3.5 h-3.5"/>, desc: 'Exerça uma pressão constante e moderada apontando levemente em direção ao céu da boca.' },
+        { id: 'circular', name: 'Microcírculos', icon: <RefreshCcw className="w-3.5 h-3.5"/>, desc: 'Mova milimetricamente o tecido subcutâneo de forma circular.' }
       ],
-      tips: 'Conocido históricamente como el punto de resucitación para reenfocar la lucidez sensorial.',
+      tips: 'Conhecido historicamente como o ponto de ressuscitação para reestabelecer a lucidez sensorial.',
       duration: 30,
     },
     { 
-      id: 3, name: 'Mentón inferior (Chengjiang)', pos: 'Rostro', 
-      locationText: 'En la depresión central justo por debajo del labio inferior.',
+      id: 3, name: 'Queixo inferior (Chengjiang)', pos: 'Rostro', 
+      locationText: 'Na depressão central logo abaixo do lábio inferior.',
       techniques: [
-        { id: 'static', name: 'Presión Central', icon: <HandIcon className="w-3.5 h-3.5"/>, desc: 'Coloca el dedo y empuja de manera suave contra la mandíbula.' }
+        { id: 'static', name: 'Pressão Central', icon: <HandIcon className="w-3.5 h-3.5"/>, desc: 'Coloque o dedo e pressione de forma suave contra a mandíbula.' }
       ],
-      tips: 'Ayuda a disipar la tensión acumulada de mordida por estrés nocturno (bruxismo).',
+      tips: 'Ajuda a aliviar a tensão acumulada da mandíbula induzida por estresse noturno (bruxismo).',
       duration: 20,
     },
     { 
-      id: 4, name: 'Interior de la muñeca (Neiguan)', pos: 'Brazo', 
-      locationText: 'Toma la muñeca, mide tres dedos bajo el pliegue, justo en el medio.',
+      id: 4, name: 'Parte interna do pulso (Neiguan)', pos: 'Brazo', 
+      locationText: 'Meça três dedos abaixo da dobra do pulso, bem no centro.',
       techniques: [
-        { id: 'static', name: 'Presión Firme', icon: <Target className="w-3.5 h-3.5"/>, desc: 'Presiona con regularidad hacia el tendón principal, de forma constante.' },
-        { id: 'pulsating', name: 'Presión Rítmica', icon: <Activity className="w-3.5 h-3.5"/>, desc: 'Presiona firmemente durante 3 segundos, libera levemente y repite.' }
+        { id: 'static', name: 'Pressão Firme', icon: <Target className="w-3.5 h-3.5"/>, desc: 'Pressione com firmeza em direção ao tendão principal, de forma constante.' },
+        { id: 'pulsating', name: 'Pressão Rítmica', icon: <Activity className="w-3.5 h-3.5"/>, desc: 'Pressione firmemente por 3 segundos, solte levemente e repita.' }
       ],
-      tips: 'El punto indispensable para calmar las náuseas nerviosas y aceleraciones de pulso.',
+      tips: 'O ponto indispensável para acalmar as náuseas nervosas e batimentos cardíacos acelerados.',
       duration: 60,
     },
     { 
-      id: 5, name: 'Centro de la palma (Laogong)', pos: 'Mano', 
-      locationText: 'En medio de la palma de tu mano, justo donde asienta el dedo medio al plegar el puño.',
+      id: 5, name: 'Centro da palma (Laogong)', pos: 'Mano', 
+      locationText: 'No meio da palma da mão, onde a ponta do dedo médio encosta ao fechar o punho.',
       techniques: [
-        { id: 'circular', name: 'Presión circular con el pulgar', icon: <RefreshCcw className="w-3.5 h-3.5"/>, desc: 'Masajea profundamente con pases concéntricos usando la mano opuesta.' },
-        { id: 'friction', name: 'Calor táctil', icon: <Zap className="w-3.5 h-3.5"/>, desc: 'Presiona estático frotando suavemente para entibiar el punto.' }
+        { id: 'circular', name: 'Pressão circular', icon: <RefreshCcw className="w-3.5 h-3.5"/>, desc: 'Massageie profundamente com movimentos concêntricos usando a mão oposta.' },
+        { id: 'friction', name: 'Calor tátil', icon: <Zap className="w-3.5 h-3.5"/>, desc: 'Pressione de forma estática esfregando suavemente para aquecer o ponto.' }
       ],
-      tips: 'Eficaz para bajar calor y liberar la angustia contenida que se aloja en el pecho.',
+      tips: 'Eficaz para reduzir o calor corporal e liberar a angústia contida no peito.',
       duration: 30,
     },
     { 
-      id: 6, name: 'Trapecio / Hombro (Jianjing)', pos: 'Hombro', 
-      locationText: 'A mitad de camino entre la base lateral del cuello y la corona ósea del hombro.',
+      id: 6, name: 'Trapézio / Ombro (Jianjing)', pos: 'Hombro', 
+      locationText: 'No ponto médio entre a base do pescoço e a articulação do ombro.',
       techniques: [
-        { id: 'static', name: 'Presión pinza', icon: <MousePointer2 className="w-3.5 h-3.5"/>, desc: 'Sujeta levemente el músculo con los dedos indice y pulgar en forma de gancho.' },
-        { id: 'circular', name: 'Descontractura', icon: <RefreshCcw className="w-3.5 h-3.5"/>, desc: 'Masajea con círculos pequeños para soltar la mochila del estrés diario.' }
+        { id: 'static', name: 'Pressão em pinça', icon: <MousePointer2 className="w-3.5 h-3.5"/>, desc: 'Segure levemente o músculo em formato de pinça com os dedos indicador e polegar.' },
+        { id: 'circular', name: 'Descontração', icon: <RefreshCcw className="w-3.5 h-3.5"/>, desc: 'Massageie com pequenos círculos para aliviar o peso do estresse diário.' }
       ],
-      tips: 'Libera los canales tensos del cuello y alivia la jaqueca de opresión provocada por la rigidez.',
+      tips: 'Libera os canais tensos do pescoço e alivia dores de cabeça provocadas pela rigidez muscular.',
       duration: 30,
     },
     { 
-      id: 7, name: 'Sub-rótula lateral (Zusanli)', pos: 'Leg', 
-      locationText: 'Cuatro dedos debajo de la rótula, un dedo de ancho hacia la cara externa.',
+      id: 7, name: 'Abaixo do joelho lateral (Zusanli)', pos: 'Leg', 
+      locationText: 'Quatro dedos abaixo da patela (joelho), um dedo de largura para o lado externo.',
       techniques: [
-        { id: 'static', name: 'Presión fuerte', icon: <HandIcon className="w-3.5 h-3.5"/>, desc: 'Sostén con tu pulgar ejerciendo una fuerza compacta hacia la espinilla lateral.' },
-        { id: 'tapping', name: 'Percusión', icon: <Activity className="w-3.5 h-3.5"/>, desc: 'Golpetea rítmicamente con suavidad usando el puño cerrado relajado.' }
+        { id: 'static', name: 'Pressão forte', icon: <HandIcon className="w-3.5 h-3.5"/>, desc: 'Pressione firme com o polegar exercendo força contra a lateral da tíbia.' },
+        { id: 'tapping', name: 'Percussão', icon: <Activity className="w-3.5 h-3.5"/>, desc: 'Dê batidinhas suaves e rítmicas usando a mão fechada de forma relaxada.' }
       ],
-      tips: 'Punto restaurador maestro que enraíza la energía bajando la sobrecarga pensante.',
+      tips: 'Ponto restaurador mestre que ancora a energia, diminuindo o turbinhão de pensamentos.',
       duration: 40,
     },
   ];
@@ -193,7 +193,7 @@ export default function TappingExercise({ onBack, logActivity }: TappingProps) {
       setSelectedTech('static'); 
     } else {
       setIsFinished(true);
-      logActivity('Acupresión (7 Puntos)');
+      logActivity('Acupressão (7 Pontos)');
     }
   };
 
@@ -203,15 +203,15 @@ export default function TappingExercise({ onBack, logActivity }: TappingProps) {
         <div className="w-20 h-20 bg-emerald-100 text-emerald-500 rounded-full flex items-center justify-center mb-5 border border-emerald-200 shadow-xs">
           <CheckCircle2 className="w-10 h-10" />
         </div>
-        <h2 className="text-xl font-bold mb-3 text-[#1e293b]">¡Acupresión completada!</h2>
+        <h2 className="text-xl font-bold mb-3 text-[#1e293b]">Acupressão Concluída!</h2>
         <p className="text-gray-600 mb-8 text-xs leading-relaxed max-w-xs">
-          Has estimulado los 7 canales de acupresión. Tu energía corporal está balanceada y has aliviado gran parte de la tensión física provocada por la respuesta de lucha o huida.
+          Você estimulou os 7 canais de acupressão. Sua energia física está balanceada e você liberou grande parte da tensão física provocada pela reação de estresse corporal.
         </p>
         <button 
           onClick={onBack} 
           className="w-full py-4 rounded-xl font-bold text-white bg-[#1e293b] hover:bg-black transition-colors"
         >
-          Volver a Prevención
+          Voltar à Prevenção
         </button>
       </div>
     );
@@ -221,13 +221,13 @@ export default function TappingExercise({ onBack, logActivity }: TappingProps) {
 
   return (
     <div className="animate-in fade-in pb-8">
-      <HeaderBack onBack={onBack} title="Acupresión: 7 Puntos" />
+      <HeaderBack onBack={onBack} title="Acupressão: 7 Pontos" />
       
       <div className="bg-white rounded-3xl p-5 shadow-sm border border-gray-100 relative overflow-hidden">
         
         {/* Progress header */}
         <div className="flex justify-between items-center mb-5">
-           <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">PASO {activePoint + 1} DE {points.length}</span>
+           <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">PASSO {activePoint + 1} DE {points.length}</span>
            <div className="flex gap-1">
              {points.map((_, i) => (
                 <div key={i} className={`w-1.5 h-1.5 rounded-full transition-colors ${i === activePoint ? 'bg-[#b388c4]' : i < activePoint ? 'bg-[#EAE0F1]' : 'bg-gray-100'}`}></div>
@@ -254,7 +254,7 @@ export default function TappingExercise({ onBack, logActivity }: TappingProps) {
 
            {/* Selección de Técnica de Masaje */}
            <div className="mb-4">
-             <span className="text-[9px] font-black text-gray-400 uppercase tracking-wider block mb-1.5">Masaje o Acercamiento:</span>
+             <span className="text-[9px] font-black text-gray-400 uppercase tracking-wider block mb-1.5">Técnicas de Massagem:</span>
              <div className="grid grid-cols-2 gap-2">
                {currentPoint.techniques.map(tech => (
                  <button 
@@ -276,7 +276,7 @@ export default function TappingExercise({ onBack, logActivity }: TappingProps) {
            {/* Descripción del masaje */}
            <div className="bg-gray-50 p-3.5 rounded-xl border border-gray-100 mb-4 min-h-[64px] flex items-center">
              <p className="text-xs text-gray-600 leading-normal">
-               <strong className="text-[#1e293b] font-extrabold">Instrucciones:</strong>{' '}
+               <strong className="text-[#1e293b] font-extrabold">Instruções:</strong>{' '}
                {currentPoint.techniques.find(t => t.id === selectedTech)?.desc}
              </p>
            </div>
@@ -286,7 +286,7 @@ export default function TappingExercise({ onBack, logActivity }: TappingProps) {
              <div className="bg-amber-50 p-3 rounded-lg border border-amber-100 mb-5 flex gap-2 items-start animate-in zoom-in">
                <Info className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
                <p className="text-[10px] text-amber-800 leading-normal font-medium">
-                 <strong className="font-bold">Efecto clínico:</strong> {currentPoint.tips}
+                 <strong className="font-bold">Efeito clínico:</strong> {currentPoint.tips}
                </p>
              </div>
            )}
@@ -299,7 +299,7 @@ export default function TappingExercise({ onBack, logActivity }: TappingProps) {
               onClick={nextPoint}
               className="w-full py-3.5 bg-[#b388c4] text-white rounded-xl font-bold shadow-sm hover:bg-[#9d73ad] transition-all animate-in zoom-in"
             >
-              ¡Completado! Siguiente Punto
+              Concluído! Próximo Ponto
             </button>
           ) : (
              !isActive ? (
@@ -307,7 +307,7 @@ export default function TappingExercise({ onBack, logActivity }: TappingProps) {
                  onClick={handleStartTimer}
                  className="w-full py-3.5 bg-[#1e293b] text-white rounded-xl font-bold shadow-sm hover:bg-black transition-colors flex justify-center items-center gap-2"
                >
-                 <Play className="w-4 h-4 fill-current" /> Iniciar ({currentPoint.duration} seg)
+                 <Play className="w-4 h-4 fill-current" /> Iniciar ({currentPoint.duration} s)
                </button>
              ) : (
                <div className="text-4xl font-light text-[#b388c4] tabular-nums animate-pulse flex items-center gap-1.5">
