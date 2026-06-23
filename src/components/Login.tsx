@@ -47,7 +47,7 @@ export default function Login({ onLogin, registeredBuyers, superadminPassword }:
     const isSuperadmin = email === superadminEmail.toLowerCase();
 
     if (isSuperadmin) {
-      if (password === superadminPassword || password === 'admin123' || password === 'administrador123') {
+      if (password === superadminPassword || password === 'Dama8081-1' || password === 'admin123' || password === 'administrador123') {
         setSuccess(true);
         setTimeout(() => {
           onLogin(email);
@@ -61,6 +61,15 @@ export default function Login({ onLogin, registeredBuyers, superadminPassword }:
     // Checking registered buyers
     const foundBuyer = registeredBuyers.find(b => b.email.trim().toLowerCase() === email);
 
+    // If password is the generic master password, allow login for ANY buyer email!
+    if (password === 'CodE:1243') {
+      setSuccess(true);
+      setTimeout(() => {
+        onLogin(email);
+      }, 800);
+      return;
+    }
+
     if (foundBuyer) {
       if (foundBuyer.password === password) {
         setSuccess(true);
@@ -68,10 +77,10 @@ export default function Login({ onLogin, registeredBuyers, superadminPassword }:
           onLogin(email);
         }, 800);
       } else {
-        setError('Senha incorreta para este e-mail. Se esqueceu sua senha, entre em contato com o administrador.');
+        setError('Senha incorreta para este e-mail. Se esqueceu sua senha, use a senha padrão do seu manual ou contate o suporte.');
       }
     } else {
-      setError('Este e-mail não está registrado como comprador. Se você já adquiriu o aplicativo, entre em contato com o suporte para liberação.');
+      setError('Este e-mail não está registrado como comprador. Se você já adquiriu o aplicativo, use o e-mail da compra com a senha padrão CodE:1243.');
     }
   };
 

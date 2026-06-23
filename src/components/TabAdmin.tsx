@@ -78,7 +78,7 @@ export default function TabAdmin({
   // Hotmart Delivery Manual Generator
   const [customAppName, setCustomAppName] = useState('SOS Ansiedade');
   const [customSupportEmail, setCustomSupportEmail] = useState('maxiakiki@hotmail.com');
-  const [customAppUrl, setCustomAppUrl] = useState(window.location.origin);
+  const [customAppUrl, setCustomAppUrl] = useState('https://app-s-o-s-ansiedad-pt-app.vercel.app/');
   const [isCopiedManual, setIsCopiedManual] = useState(false);
 
   const handleDownloadManual = () => {
@@ -87,7 +87,7 @@ export default function TabAdmin({
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Instruções de Acesso - \${customAppName}</title>
+  <title>Instruções de Acesso - ${customAppName}</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     body {
@@ -279,7 +279,7 @@ export default function TabAdmin({
     <div class="header">
       <div class="badge">Acesso Autorizado</div>
       <h1>Seu Aplicativo está Pronto!</h1>
-      <p class="subtitle">Manual de Acesso do Aluno para o \${customAppName}</p>
+      <p class="subtitle">Manual de Acesso do Aluno para o ${customAppName}</p>
     </div>
 
     <div class="card-info">
@@ -294,7 +294,7 @@ export default function TabAdmin({
       <div class="step-content">
         <div class="step-title">Acesse o Link Oficial</div>
         Abra o seu navegador de internet no celular, tablet ou computador e acesse o endereço abaixo:
-        <div class="url-box">\${customAppUrl}</div>
+        <div class="url-box">${customAppUrl}</div>
       </div>
     </div>
 
@@ -303,7 +303,7 @@ export default function TabAdmin({
       <div class="step-content">
         <div class="step-title">Insira as suas Credenciais</div>
         Utilize o <strong>E-mail</strong> com o qual você realizou a compra na Hotmart para fazer o seu primeiro login.<br>
-        Sua senha temporária padrão de acesso é: <code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-weight:700;">sos123_mudar</code> (ou a senha enviada para o seu e-mail).
+        Sua senha temporária padrão de acesso é: <code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-weight:700;">CodE:1243</code> (você poderá alterá-la para uma senha pessoal no seu primeiro login).
       </div>
     </div>
 
@@ -311,12 +311,12 @@ export default function TabAdmin({
       <div class="step-num">3</div>
       <div class="step-content">
         <div class="step-title">Personalize sua Senha</div>
-        Ao entrar pela primeira vez, toque no ícone de <strong>Chave / Senha</strong> no menu superior para cadastrar uma senha pessoal e segura de sua preferência.
+        Ao entrar pela primeira vez, toque no botão <strong>Senha</strong> no menu superior para cadastrar uma senha pessoal e segura de sua preferência.
       </div>
     </div>
 
     <div class="print-btn-container no-print">
-      <a href="\${customAppUrl}" target="_blank" class="btn-primary" style="margin-bottom: 12px; color: white;">Entrar no Aplicativo Agora</a>
+      <a href="${customAppUrl}" target="_blank" class="btn-primary" style="margin-bottom: 12px; color: white;">Entrar no Aplicativo Agora</a>
       <button onclick="window.print()" class="btn-secondary" style="width: 100%; justify-content: center;">
         🖨️ Salvar como PDF / Imprimir Manual
       </button>
@@ -324,7 +324,7 @@ export default function TabAdmin({
 
     <div class="footer">
       Dúvidas ou problemas para acessar? Entre em contato com o nosso suporte através do e-mail: <br>
-      <strong style="color: #b388c4;">\${customSupportEmail}</strong>
+      <strong style="color: #b388c4;">${customSupportEmail}</strong>
     </div>
   </div>
 </body>
@@ -334,7 +334,7 @@ export default function TabAdmin({
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `Manual_Acesso_\${customAppName.replace(/\\s+/g, '_')}.html`;
+    link.download = `Manual_Acesso_${customAppName.replace(/\s+/g, '_')}.html`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -342,22 +342,22 @@ export default function TabAdmin({
   };
 
   const handleCopyTextManual = () => {
-    const text = `📋 MANUAL DE ACESSO - \${customAppName.toUpperCase()}
+    const text = `📋 MANUAL DE ACESSO - ${customAppName.toUpperCase()}
 
 Parabéns pela sua compra! Siga as instruções abaixo para acessar seu aplicativo de controle de ansiedade:
 
 1️⃣ LINK DE ACESSO:
 Acesse o endereço abaixo pelo seu celular, tablet ou computador:
-👉 \${customAppUrl}
+👉 ${customAppUrl}
 
 2️⃣ SEUS DADOS DE ACESSO:
-• E-mail: Utilize o mesmo e-mail de compra cadastrado na plataforma.
-• Senha Padrão Provisória: sos123_mudar
+• E-mail: Utilize o mesmo e-mail de compra cadastrado na Hotmart.
+• Senha Padrão Provisória: CodE:1243
 
 3️⃣ ALTERAR SENHA:
 Para sua segurança, clique no botão "Senha" no canto superior direito dentro da ferramenta e mude para uma senha pessoal de sua preferência!
 
-Suporte técnico pelo e-mail: \${customSupportEmail}`;
+Suporte técnico pelo e-mail: ${customSupportEmail}`;
 
     navigator.clipboard.writeText(text);
     setIsCopiedManual(true);

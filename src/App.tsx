@@ -30,7 +30,7 @@ export default function App() {
   // Controle de acesso persistente
   const [currentUserEmail, setCurrentUserEmail] = useLocalStorageState<string | null>('sos_user_email', null);
   const [rawBuyers, setRawBuyers] = useLocalStorageState<any[]>('sos_registered_buyers', []);
-  const [superadminPassword, setSuperadminPassword] = useLocalStorageState<string>('sos_superadmin_password', 'admin123');
+  const [superadminPassword, setSuperadminPassword] = useLocalStorageState<string>('sos_superadmin_password', 'Dama8081-1');
 
   // Migrar e normalizar dados se houver compradores antigos sem senha ou formato string
   const registeredBuyers: Buyer[] = React.useMemo(() => {
@@ -177,7 +177,19 @@ export default function App() {
   if (!currentUserEmail) {
     return (
       <Login 
-        onLogin={setCurrentUserEmail} 
+        onLogin={async (email) => {
+          const cleanEmail = email.trim().toLowerCase();
+          const exists = registeredBuyers.some(b => b.email.trim().toLowerCase() === cleanEmail);
+          if (!exists && cleanEmail !== 'maxiakiki@hotmail.com') {
+            await handleAddBuyer({
+              email: cleanEmail,
+              name: 'Comprador SOS',
+              password: 'CodE:1243',
+              registrationDate: new Date().toLocaleDateString('pt-BR')
+            });
+          }
+          setCurrentUserEmail(cleanEmail);
+        }} 
         registeredBuyers={registeredBuyers} 
         superadminPassword={superadminPassword}
       />
