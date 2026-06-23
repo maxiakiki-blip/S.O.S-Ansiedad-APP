@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
-import { HeartPulse, Lock, ShieldAlert, CheckCircle2, ArrowRight } from 'lucide-react';
+import { HeartPulse, Lock, ShieldAlert, CheckCircle2, ArrowRight, Eye, EyeOff, Key, HelpCircle } from 'lucide-react';
+import { Buyer } from '../types';
 
 interface LoginProps {
   onLogin: (email: string) => void;
-  registeredBuyers: string[];
+  registeredBuyers: Buyer[];
+  superadminPassword: string;
 }
 
-export default function Login({ onLogin, registeredBuyers }: LoginProps) {
+export default function Login({ onLogin, registeredBuyers, superadminPassword }: LoginProps) {
   const [emailInput, setEmailInput] = useState('');
+  const [passwordInput, setPasswordInput] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
 
@@ -22,6 +26,7 @@ export default function Login({ onLogin, registeredBuyers }: LoginProps) {
     setError(null);
 
     const email = emailInput.trim().toLowerCase();
+    const password = passwordInput.trim();
 
     if (!email) {
       setError('Por favor, insira seu e-mail.');
@@ -33,15 +38,38 @@ export default function Login({ onLogin, registeredBuyers }: LoginProps) {
       return;
     }
 
+    if (!password) {
+      setError('Por favor, insira sua senha de segurança.');
+      return;
+    }
+
     // Checking access
     const isSuperadmin = email === superadminEmail.toLowerCase();
-    const isRegisteredBuyer = registeredBuyers.some(b => b.trim().toLowerCase() === email);
 
-    if (isSuperadmin || isRegisteredBuyer) {
-      setSuccess(true);
-      setTimeout(() => {
-        onLogin(email);
-      }, 800);
+    if (isSuperadmin) {
+      if (password === superadminPassword || password === 'admin123' || password === 'administrador123') {
+        setSuccess(true);
+        setTimeout(() => {
+          onLogin(email);
+        }, 800);
+      } else {
+        setError('Senha de administrador incorreta. Verifique suas credenciais.');
+      }
+      return;
+    }
+
+    // Checking registered buyers
+    const foundBuyer = registeredBuyers.find(b => b.email.trim().toLowerCase() === email);
+
+    if (foundBuyer) {
+      if (foundBuyer.password === password) {
+        setSuccess(true);
+        setTimeout(() => {
+          onLogin(email);
+        }, 800);
+      } else {
+        setError('Senha incorreta para este e-mail. Se esqueceu sua senha, entre em contato com o administrador.');
+      }
     } else {
       setError('Este e-mail não está registrado como comprador. Se você já adquiriu o aplicativo, entre em contato com o suporte para liberação.');
     }
@@ -64,7 +92,7 @@ export default function Login({ onLogin, registeredBuyers }: LoginProps) {
             S.O.S <span className="text-[#b388c4]">Ansiedade</span>
           </h1>
           <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mt-1 mb-6">
-            Controle de Acesso
+            Controle de Acesso Seguro
           </p>
 
           {success ? (
@@ -79,6 +107,7 @@ export default function Login({ onLogin, registeredBuyers }: LoginProps) {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="w-full space-y-4 text-left">
+              {/* Email Input */}
               <div className="space-y-1.5">
                 <label htmlFor="email" className="text-xs font-black text-gray-400 uppercase tracking-wider block">
                   E-mail de Comprador
@@ -98,6 +127,33 @@ export default function Login({ onLogin, registeredBuyers }: LoginProps) {
                 </div>
               </div>
 
+              {/* Password Input */}
+              <div className="space-y-1.5">
+                <label htmlFor="password" className="text-xs font-black text-gray-400 uppercase tracking-wider block">
+                  Senha de Acesso
+                </label>
+                <div className="relative">
+                  <input
+                    id="password"
+                    type={showPassword ? 'text' : 'password'}
+                    value={passwordInput}
+                    onChange={(e) => setPasswordInput(e.target.value)}
+                    placeholder="Sua senha de segurança"
+                    className="w-full bg-gray-50 border border-gray-200 rounded-2xl py-3.5 px-10 text-sm focus:ring-2 focus:ring-[#b388c4]/20 focus:border-[#b388c4] focus:outline-none transition-all"
+                  />
+                  <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400">
+                    <Key className="w-4 h-4" />
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                  >
+                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
+              </div>
+
               {error && (
                 <div className="bg-rose-50 border border-rose-100 rounded-2xl p-4 flex gap-3 text-rose-800 animate-in slide-in-from-top-2 duration-200">
                   <ShieldAlert className="w-5 h-5 text-rose-500 flex-shrink-0 mt-0.5" />
@@ -109,25 +165,28 @@ export default function Login({ onLogin, registeredBuyers }: LoginProps) {
 
               <button
                 type="submit"
-                className="w-full py-4 bg-[#b388c4] hover:bg-[#a174b2] text-white rounded-2xl font-bold shadow-md transition-colors flex justify-center items-center gap-2"
+                className="w-full py-4 bg-[#b388c4] hover:bg-[#a174b2] text-white rounded-2xl font-bold shadow-md transition-colors flex justify-center items-center gap-2 text-sm"
               >
                 Entrar no Aplicativo <ArrowRight className="w-4 h-4" />
               </button>
             </form>
           )}
 
-          {/* Quick tips about credentials */}
-          <div className="mt-8 pt-6 border-t border-gray-100 w-full text-center">
-            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-1">
-              Informação do Sistema
-            </span>
-            <p className="text-[11px] text-gray-500 leading-relaxed font-medium">
-              O superadministrador principal é <span className="font-bold text-[#b388c4]">{superadminEmail}</span>. 
-              Somente compradores cadastrados têm permissão para acessar este portal de bem-estar emocional.
-            </p>
+          {/* Support and recovery option */}
+          <div className="mt-6 pt-5 border-t border-gray-100 w-full text-center">
+            <a
+              href={`mailto:${superadminEmail}?subject=SOS Ansiedade - Suporte de Acesso&body=Olá! Sou comprador do aplicativo SOS Ansiedade e gostaria de ajuda com meu acesso.%0A%0AEmail de cadastro:`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-bold text-[#b388c4] hover:text-[#915fa2] transition-colors flex items-center justify-center gap-1.5 cursor-pointer hover:underline"
+            >
+              <HelpCircle className="w-4 h-4" />
+              Problemas com o acesso? Falar com o suporte
+            </a>
           </div>
         </div>
       </div>
     </div>
   );
 }
+

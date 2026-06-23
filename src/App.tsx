@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { HeartPulse, AlertCircle, ShieldCheck, TrendingUp, LogOut, Users } from 'lucide-react';
+import { HeartPulse, AlertCircle, ShieldCheck, TrendingUp, LogOut, Users, Key } from 'lucide-react';
 
 import { useLocalStorageState } from './hooks/useLocalStorageState';
 import TabRescate from './components/TabRescate';
@@ -8,6 +8,8 @@ import TabProgreso from './components/TabProgreso';
 import TabAdmin from './components/TabAdmin';
 import Login from './components/Login';
 import NavButton from './components/NavButton';
+import SecuritySettingsModal from './components/SecuritySettingsModal';
+import { Buyer } from './types';
 
 // --- PALETA DE COLORES BASADA EN LA IDENTIDAD ---
 // Fondo principal: bg-[#FDFBF7] (Crema muy suave de bienestar)
@@ -17,6 +19,7 @@ import NavButton from './components/NavButton';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('rescate');
+  const [isSecurityModalOpen, setIsSecurityModalOpen] = useState(false);
   
   // Persistencia de actividades en LocalStorage usando hook personalizado DRY
   const [logs, setLogs] = useLocalStorageState<Record<string, string[]>>('sos_ansiedad_logs', {});
@@ -26,7 +29,53 @@ export default function App() {
 
   // Controle de acesso persistente
   const [currentUserEmail, setCurrentUserEmail] = useLocalStorageState<string | null>('sos_user_email', null);
-  const [registeredBuyers, setRegisteredBuyers] = useLocalStorageState<string[]>('sos_registered_buyers', []);
+  const [rawBuyers, setRawBuyers] = useLocalStorageState<any[]>('sos_registered_buyers', []);
+  const [superadminPassword, setSuperadminPassword] = useLocalStorageState<string>('sos_superadmin_password', 'admin123');
+
+  // Migrar e normalizar dados se houver compradores antigos sem senha ou formato string
+  const registeredBuyers: Buyer[] = React.useMemo(() => {
+    return rawBuyers.map(b => {
+      if (typeof b === 'string') {
+        return {
+          email: b.trim().toLowerCase(),
+          password: 'sos123_mudar',
+          name: 'Comprador',
+          registrationDate: new Date().toLocaleDateString('pt-BR')
+        };
+      }
+      return {
+        email: (b.email || '').trim().toLowerCase(),
+        password: b.password || 'sos123_mudar',
+        name: b.name || 'Comprador',
+        registrationDate: b.registrationDate || new Date().toLocaleDateString('pt-BR')
+      };
+    });
+  }, [rawBuyers]);
+
+  // Synchronize buyers with Express Server
+  React.useEffect(() => {
+    const fetchServerBuyers = async () => {
+      try {
+        const res = await fetch('/api/buyers');
+        if (res.ok) {
+          const serverBuyers = await res.json();
+          if (Array.isArray(serverBuyers)) {
+            // Merge with local storage buyers (server takes priority on duplicates)
+            setRawBuyers(prev => {
+              const localOnly = prev.filter(localB => {
+                const localEmail = typeof localB === 'string' ? localB : localB.email;
+                return !serverBuyers.some(serverB => serverB.email.toLowerCase() === localEmail.toLowerCase());
+              });
+              return [...localOnly, ...serverBuyers];
+            });
+          }
+        }
+      } catch (err) {
+        console.warn('Backend server not online or client standalone mode. Operating locally.', err);
+      }
+    };
+    fetchServerBuyers();
+  }, []);
 
   const getTodayDate = () => {
     const today = new Date();
@@ -49,18 +98,74 @@ export default function App() {
     setMoods(prev => ({ ...prev, [today]: moodId }));
   };
 
-  const handleAddBuyer = (email: string) => {
-    setRegisteredBuyers(prev => {
-      const normalized = email.trim().toLowerCase();
-      if (!prev.includes(normalized)) {
-        return [...prev, normalized];
-      }
-      return prev;
+  const handleAddBuyer = async (buyer: Buyer) => {
+    // Add locally immediately for optimistic UI
+    setRawBuyers(prev => {
+      const updated = prev.filter(b => {
+        const email = typeof b === 'string' ? b : b.email;
+        return email.trim().toLowerCase() !== buyer.email.toLowerCase();
+      });
+      return [...updated, buyer];
     });
+
+    // Sync to Express backend
+    try {
+      await fetch('/api/buyers', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(buyer)
+      });
+    } catch (err) {
+      console.warn('Failed to sync added buyer to server:', err);
+    }
   };
 
-  const handleRemoveBuyer = (email: string) => {
-    setRegisteredBuyers(prev => prev.filter(e => e.trim().toLowerCase() !== email.trim().toLowerCase()));
+  const handleRemoveBuyer = async (email: string) => {
+    // Remove locally immediately for optimistic UI
+    setRawBuyers(prev => prev.filter(b => {
+      const bEmail = typeof b === 'string' ? b : b.email;
+      return bEmail.trim().toLowerCase() !== email.trim().toLowerCase();
+    }));
+
+    // Sync to Express backend
+    try {
+      await fetch(`/api/buyers/${encodeURIComponent(email)}`, {
+        method: 'DELETE'
+      });
+    } catch (err) {
+      console.warn('Failed to sync deleted buyer to server:', err);
+    }
+  };
+
+  const handleUpdateBuyerPassword = async (email: string, newPass: string) => {
+    // Update locally immediately for optimistic UI
+    setRawBuyers(prev => {
+      return prev.map(b => {
+        const bEmail = typeof b === 'string' ? b : b.email;
+        if (bEmail.trim().toLowerCase() === email.trim().toLowerCase()) {
+          const name = typeof b === 'string' ? 'Comprador' : b.name;
+          const regDate = typeof b === 'string' ? new Date().toLocaleDateString('pt-BR') : b.registrationDate;
+          return {
+            email: email.trim().toLowerCase(),
+            password: newPass,
+            name: name || 'Comprador',
+            registrationDate: regDate || new Date().toLocaleDateString('pt-BR')
+          };
+        }
+        return b;
+      });
+    });
+
+    // Sync to Express backend
+    try {
+      await fetch(`/api/buyers/${encodeURIComponent(email)}/password`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: newPass })
+      });
+    } catch (err) {
+      console.warn('Failed to sync updated password to server:', err);
+    }
   };
 
   const handleLogout = () => {
@@ -70,10 +175,22 @@ export default function App() {
 
   // Se o usuário não estiver logado, exibe a tela de login
   if (!currentUserEmail) {
-    return <Login onLogin={setCurrentUserEmail} registeredBuyers={registeredBuyers} />;
+    return (
+      <Login 
+        onLogin={setCurrentUserEmail} 
+        registeredBuyers={registeredBuyers} 
+        superadminPassword={superadminPassword}
+      />
+    );
   }
 
   const isSuperadmin = currentUserEmail.trim().toLowerCase() === 'maxiakiki@hotmail.com';
+  
+  // Obter o nome do usuário logado para personalização
+  const currentUserName = isSuperadmin 
+    ? 'Superadmin' 
+    : (registeredBuyers.find(b => b.email.toLowerCase() === currentUserEmail.trim().toLowerCase())?.name || 'Comprador');
+
 
   return (
     <div className="min-h-screen bg-[#FDFBF7] text-[#1e293b] font-sans pb-24 selection:bg-[#b388c4] selection:text-white">
@@ -113,13 +230,18 @@ export default function App() {
       {/* HEADER */}
       <header className="bg-white p-4 shadow-sm sticky top-0 z-40 border-b border-[#EAE0F1]">
         <div className="max-w-md mx-auto flex items-center justify-between gap-2">
-          <div className="flex items-center gap-2">
-            <div className="bg-[#b388c4] p-1.5 rounded-full">
-              <HeartPulse className="w-5 h-5 text-white" />
+          <div className="flex flex-col">
+            <div className="flex items-center gap-2">
+              <div className="bg-[#b388c4] p-1.5 rounded-full">
+                <HeartPulse className="w-4 h-4 text-white" />
+              </div>
+              <h1 className="text-base font-black tracking-tight text-[#1e293b]">
+                S.O.S <span className="text-[#b388c4]">Ansiedade</span>
+              </h1>
             </div>
-            <h1 className="text-lg font-bold tracking-tight text-[#1e293b]">
-              S.O.S <span className="text-[#b388c4]">Ansiedade</span>
-            </h1>
+            <span className="text-[10px] text-gray-400 font-bold mt-0.5 ml-1 select-none">
+              Olá, <span className="text-[#b388c4]">{currentUserName}</span>
+            </span>
           </div>
           
           <div className="flex items-center gap-2">
@@ -128,6 +250,14 @@ export default function App() {
                 Admin
               </span>
             )}
+            <button 
+              onClick={() => setIsSecurityModalOpen(true)}
+              title="Segurança da conta"
+              className="p-1 text-gray-400 hover:text-[#b388c4] rounded-lg transition-colors flex items-center gap-0.5 text-[10px] font-bold"
+            >
+              <Key className="w-3.5 h-3.5 text-gray-400" />
+              <span>Senha</span>
+            </button>
             <button 
               onClick={handleLogout}
               title="Sair do aplicativo"
@@ -157,6 +287,9 @@ export default function App() {
             onAddBuyer={handleAddBuyer} 
             onRemoveBuyer={handleRemoveBuyer} 
             superadminEmail="maxiakiki@hotmail.com" 
+            superadminPassword={superadminPassword}
+            onChangeSuperadminPassword={setSuperadminPassword}
+            onImportBuyers={(buyers) => setRawBuyers(buyers)}
           />
         )}
       </main>
@@ -192,6 +325,18 @@ export default function App() {
           )}
         </div>
       </nav>
+
+      {/* Security and password modal */}
+      <SecuritySettingsModal
+        isOpen={isSecurityModalOpen}
+        onClose={() => setIsSecurityModalOpen(false)}
+        currentUserEmail={currentUserEmail}
+        isSuperadmin={isSuperadmin}
+        registeredBuyers={registeredBuyers}
+        superadminPassword={superadminPassword}
+        onChangeSuperadminPassword={setSuperadminPassword}
+        onUpdateBuyerPassword={handleUpdateBuyerPassword}
+      />
     </div>
   );
 }
