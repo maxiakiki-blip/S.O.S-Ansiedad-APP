@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { HeartPulse, AlertCircle, ShieldCheck, TrendingUp } from 'lucide-react';
+import { HeartPulse, AlertCircle, ShieldCheck, TrendingUp, LogOut, Users } from 'lucide-react';
 
 import { useLocalStorageState } from './hooks/useLocalStorageState';
 import TabRescate from './components/TabRescate';
 import TabPrevencion from './components/TabPrevencion';
 import TabProgreso from './components/TabProgreso';
+import TabAdmin from './components/TabAdmin';
+import Login from './components/Login';
 import NavButton from './components/NavButton';
 
 // --- PALETA DE COLORES BASADA EN LA IDENTIDAD ---
@@ -21,6 +23,10 @@ export default function App() {
 
   // Persistencia de ánimo diario en LocalStorage usando hook personalizado DRY
   const [moods, setMoods] = useLocalStorageState<Record<string, string>>('sos_ansiedad_moods', {});
+
+  // Controle de acesso persistente
+  const [currentUserEmail, setCurrentUserEmail] = useLocalStorageState<string | null>('sos_user_email', null);
+  const [registeredBuyers, setRegisteredBuyers] = useLocalStorageState<string[]>('sos_registered_buyers', []);
 
   const getTodayDate = () => {
     const today = new Date();
@@ -42,6 +48,32 @@ export default function App() {
     const today = getTodayDate();
     setMoods(prev => ({ ...prev, [today]: moodId }));
   };
+
+  const handleAddBuyer = (email: string) => {
+    setRegisteredBuyers(prev => {
+      const normalized = email.trim().toLowerCase();
+      if (!prev.includes(normalized)) {
+        return [...prev, normalized];
+      }
+      return prev;
+    });
+  };
+
+  const handleRemoveBuyer = (email: string) => {
+    setRegisteredBuyers(prev => prev.filter(e => e.trim().toLowerCase() !== email.trim().toLowerCase()));
+  };
+
+  const handleLogout = () => {
+    setCurrentUserEmail(null);
+    setActiveTab('rescate');
+  };
+
+  // Se o usuário não estiver logado, exibe a tela de login
+  if (!currentUserEmail) {
+    return <Login onLogin={setCurrentUserEmail} registeredBuyers={registeredBuyers} />;
+  }
+
+  const isSuperadmin = currentUserEmail.trim().toLowerCase() === 'maxiakiki@hotmail.com';
 
   return (
     <div className="min-h-screen bg-[#FDFBF7] text-[#1e293b] font-sans pb-24 selection:bg-[#b388c4] selection:text-white">
@@ -80,13 +112,31 @@ export default function App() {
 
       {/* HEADER */}
       <header className="bg-white p-4 shadow-sm sticky top-0 z-40 border-b border-[#EAE0F1]">
-        <div className="max-w-md mx-auto flex items-center justify-center gap-2">
-          <div className="bg-[#b388c4] p-1.5 rounded-full">
-            <HeartPulse className="w-5 h-5 text-white" />
+        <div className="max-w-md mx-auto flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2">
+            <div className="bg-[#b388c4] p-1.5 rounded-full">
+              <HeartPulse className="w-5 h-5 text-white" />
+            </div>
+            <h1 className="text-lg font-bold tracking-tight text-[#1e293b]">
+              S.O.S <span className="text-[#b388c4]">Ansiedade</span>
+            </h1>
           </div>
-          <h1 className="text-lg font-bold tracking-tight text-[#1e293b]">
-            S.O.S <span className="text-[#b388c4]">Ansiedade</span>
-          </h1>
+          
+          <div className="flex items-center gap-2">
+            {isSuperadmin && (
+              <span className="text-[9px] bg-amber-50 text-amber-700 font-extrabold border border-amber-200/50 px-2 py-0.5 rounded-full uppercase tracking-wider select-none animate-pulse">
+                Admin
+              </span>
+            )}
+            <button 
+              onClick={handleLogout}
+              title="Sair do aplicativo"
+              className="p-1 text-gray-400 hover:text-rose-500 rounded-lg transition-colors flex items-center gap-0.5 text-[10px] font-bold"
+            >
+              <LogOut className="w-3.5 h-3.5" />
+              <span>Sair</span>
+            </button>
+          </div>
         </div>
       </header>
 
@@ -101,6 +151,14 @@ export default function App() {
           />
         )}
         {activeTab === 'progreso' && <TabProgreso logs={logs} moods={moods} />}
+        {activeTab === 'admin' && isSuperadmin && (
+          <TabAdmin 
+            registeredBuyers={registeredBuyers} 
+            onAddBuyer={handleAddBuyer} 
+            onRemoveBuyer={handleRemoveBuyer} 
+            superadminEmail="maxiakiki@hotmail.com" 
+          />
+        )}
       </main>
 
       {/* BOTTOM NAVIGATION */}
@@ -124,6 +182,14 @@ export default function App() {
             isActive={activeTab === 'progreso'} 
             onClick={() => setActiveTab('progreso')} 
           />
+          {isSuperadmin && (
+            <NavButton 
+              icon={<Users className="w-5 h-5" />} 
+              label="Admin" 
+              isActive={activeTab === 'admin'} 
+              onClick={() => setActiveTab('admin')} 
+            />
+          )}
         </div>
       </nav>
     </div>
