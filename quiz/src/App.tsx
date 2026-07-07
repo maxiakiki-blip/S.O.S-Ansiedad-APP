@@ -10,6 +10,7 @@ import { InterstitialScreen } from './components/InterstitialScreen';
 import { LoadingScreen } from './components/LoadingScreen';
 import { EmailGateScreen } from './components/EmailGateScreen';
 import { ResultScreen } from './components/ResultScreen';
+import { AmbientBackground } from './components/AmbientBackground';
 
 const QUESTION_IDS = QUESTIONS.map((q) => q.id);
 
@@ -113,41 +114,52 @@ export default function App() {
 
   const { screen } = state;
 
-  if (screen === 'intro') {
-    return <IntroScreen onStart={handleStart} />;
-  }
+  function renderScreen() {
+    if (screen === 'intro') {
+      return <IntroScreen onStart={handleStart} />;
+    }
 
-  if (screen === 'interstitial') {
-    return <InterstitialScreen q5OptionId={state.answers.q5 ?? 'c'} onContinue={handleInterstitialContinue} />;
-  }
+    if (screen === 'interstitial') {
+      return <InterstitialScreen q5OptionId={state.answers.q5 ?? 'c'} onContinue={handleInterstitialContinue} />;
+    }
 
-  if (screen === 'loading') {
-    return <LoadingScreen onDone={handleLoadingDone} />;
-  }
+    if (screen === 'loading') {
+      return <LoadingScreen onDone={handleLoadingDone} />;
+    }
 
-  if (screen === 'emailGate') {
-    return <EmailGateScreen onSubmit={handleEmailSubmit} />;
-  }
+    if (screen === 'emailGate') {
+      return <EmailGateScreen onSubmit={handleEmailSubmit} />;
+    }
 
-  if (screen === 'result') {
-    const { profile, score, band } = computeResult(state.answers);
-    return <ResultScreen profile={profile} score={score} band={band} />;
-  }
+    if (screen === 'result') {
+      const { profile, score, band } = computeResult(state.answers);
+      return <ResultScreen profile={profile} score={score} band={band} />;
+    }
 
-  const question = QUESTIONS.find((q) => q.id === screen);
-  if (!question) {
-    return <IntroScreen onStart={handleStart} />;
+    const question = QUESTIONS.find((q) => q.id === screen);
+    if (!question) {
+      return <IntroScreen onStart={handleStart} />;
+    }
+
+    return (
+      <QuestionScreen
+        key={question.id}
+        question={question}
+        index={QUESTION_IDS.indexOf(question.id)}
+        total={QUESTION_IDS.length}
+        selectedOptionId={state.answers[question.id]}
+        onAnswer={(optionId) => handleAnswer(question.id, optionId)}
+        onBack={question.id === 'q1' ? undefined : () => handleBack(question.id)}
+      />
+    );
   }
 
   return (
-    <QuestionScreen
-      key={question.id}
-      question={question}
-      index={QUESTION_IDS.indexOf(question.id)}
-      total={QUESTION_IDS.length}
-      selectedOptionId={state.answers[question.id]}
-      onAnswer={(optionId) => handleAnswer(question.id, optionId)}
-      onBack={question.id === 'q1' ? undefined : () => handleBack(question.id)}
-    />
+    <>
+      <AmbientBackground />
+      <div key={screen} className="screen-enter">
+        {renderScreen()}
+      </div>
+    </>
   );
 }
