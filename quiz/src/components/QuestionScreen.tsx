@@ -3,6 +3,7 @@ import type { QuizQuestion } from '../quiz.config';
 import { ProgressBar } from './ProgressBar';
 import { OptionCard } from './OptionCard';
 import { COPY } from '../quiz.config';
+import { getOptionIcon } from '../lib/optionIcon';
 
 interface QuestionScreenProps {
   question: QuizQuestion;
@@ -48,6 +49,7 @@ export function QuestionScreen({ question, index, total, selectedOptionId, onAns
               label={option.label}
               selected={activeId === option.id}
               onSelect={() => handleSelect(option.id)}
+              icon={getOptionIcon(question.id, option.id, option)}
             />
           ))}
         </div>
